@@ -67,6 +67,7 @@ color:white;
 font-weight:bold;
 font-size:1.2em;
 transition:0.3s;
+text-align:center;
 }
 
 .button:hover{
@@ -95,6 +96,10 @@ border-radius:15px;
 text-align:center;
 transition:0.35s;
 cursor:default;
+display:flex;
+flex-direction:column;
+align-items:center;
+justify-content:center;
 }
 
 .stat:hover{
@@ -106,6 +111,7 @@ border:1px solid #ff0000;
 .stat h3{
 color:#00ff88;
 font-size:28px;
+word-break: break-word;
 }
 
 .reviews{
@@ -155,7 +161,7 @@ height:250px;
 
 .stats{
 grid-template-columns:repeat(2,1fr);
-gap:12px;
+gap:15px;
 }
 
 .stat h3{
@@ -182,6 +188,7 @@ margin-bottom:40px;
 }
 
 @media(max-width:480px){
+
 h1{
 font-size:2em;
 }
@@ -192,6 +199,11 @@ font-size:1.2em;
 
 .stats{
 grid-template-columns:1fr;
+gap:12px;
+}
+
+.stat h3{
+font-size:20px;
 }
 
 .review{
@@ -212,7 +224,9 @@ padding:30px 15px;
 p,li{
 font-size:0.95em;
 }
+
 }
+
 </style>
 </head>
 
