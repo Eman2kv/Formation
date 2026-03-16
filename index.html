@@ -112,6 +112,12 @@ border:1px solid #ff0000;
 color:#00ff88;
 font-size:28px;
 word-break: break-word;
+transition:transform 0.3s ease, text-shadow 0.3s ease;
+}
+
+.stat.animate h3{
+transform:scale(1.08);
+text-shadow:0 0 18px rgba(0,255,136,0.45);
 }
 
 .reviews{
@@ -243,22 +249,22 @@ font-size:0.95em;
 <div class="stats">
 
 <div class="stat">
-<h3>45</h3>
+<h3 class="counter" data-target="45" data-suffix="">0</h3>
 <p>Élèves formés</p>
 </div>
 
 <div class="stat">
-<h3>100 000€</h3>
+<h3 class="counter" data-target="100000" data-suffix="€">0€</h3>
 <p>Chiffre d'affaires généré</p>
 </div>
 
 <div class="stat">
-<h3>3 ans</h3>
+<h3 class="counter" data-target="3" data-suffix=" ans">0 ans</h3>
 <p>D'expertise</p>
 </div>
 
 <div class="stat">
-<h3>4.9</h3>
+<h3 class="counter" data-target="4.9" data-suffix="" data-decimals="1">0</h3>
 <p>Note moyenne</p>
 </div>
 
@@ -384,6 +390,61 @@ Je veux accéder à Zone d’Ombre maintenant
 
 <script>
 document.getElementById("year").textContent = new Date().getFullYear();
+
+const counters = document.querySelectorAll(".counter");
+
+function formatNumber(value, suffix = "", decimals = 0) {
+const fixed = Number(value).toFixed(decimals);
+let parts = fixed.split(".");
+parts[0] = Number(parts[0]).toLocaleString("fr-FR");
+return parts.join(decimals > 0 ? "." : "") + suffix;
+}
+
+function animateCounter(counter) {
+const target = parseFloat(counter.dataset.target);
+const suffix = counter.dataset.suffix || "";
+const decimals = parseInt(counter.dataset.decimals || "0");
+const parent = counter.closest(".stat");
+
+let startTimestamp = null;
+const duration = 1800;
+
+function update(timestamp) {
+if (!startTimestamp) startTimestamp = timestamp;
+const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+const easeOut = 1 - Math.pow(1 - progress, 3);
+const current = target * easeOut;
+
+counter.textContent = formatNumber(current, suffix, decimals);
+
+if (parent) {
+parent.classList.add("animate");
+}
+
+if (progress < 1) {
+requestAnimationFrame(update);
+} else {
+counter.textContent = formatNumber(target, suffix, decimals);
+setTimeout(() => {
+if (parent) parent.classList.remove("animate");
+}, 300);
+}
+}
+
+requestAnimationFrame(update);
+}
+
+const observer = new IntersectionObserver((entries, obs) => {
+entries.forEach(entry => {
+if (entry.isIntersecting) {
+const counter = entry.target;
+animateCounter(counter);
+obs.unobserve(counter);
+}
+});
+}, { threshold: 0.6 });
+
+counters.forEach(counter => observer.observe(counter));
 </script>
 
 </body>
