@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -69,11 +68,62 @@ font-weight:bold;
 font-size:1.2em;
 transition:0.3s;
 text-align:center;
+position:relative;
+overflow:hidden;
+}
+
+.button::before{
+content:"";
+position:absolute;
+top:0;
+left:-75%;
+width:50%;
+height:100%;
+background:linear-gradient(120deg, transparent, rgba(255,255,255,0.45), transparent);
+transform:skewX(-25deg);
+animation:shine 3s infinite;
+pointer-events:none;
+}
+
+@keyframes shine{
+0%{left:-75%;}
+50%{left:125%;}
+100%{left:125%;}
 }
 
 .button:hover{
 transform:scale(1.08);
 box-shadow:0 0 25px rgba(255,0,0,0.8);
+}
+
+.social-card{
+background:#111;
+border:1px solid #222;
+border-radius:18px;
+padding:24px 18px;
+text-align:center;
+transition:0.35s;
+max-width:520px;
+margin:30px auto 0 auto;
+}
+
+.social-card:hover{
+transform:translateY(-6px);
+box-shadow:0 0 20px rgba(255,0,0,0.25);
+border:1px solid #ff3b3b;
+}
+
+.social-card p{
+font-size:0.95em;
+color:#a8a8a8;
+margin-top:12px;
+}
+
+.community-grid{
+display:grid;
+grid-template-columns:1fr;
+gap:20px;
+margin-top:30px;
 }
 
 iframe{
@@ -152,6 +202,80 @@ font-size:0.9em;
 margin-top:10px;
 }
 
+/* Résultats stylés */
+.results-stack{
+display:flex;
+flex-wrap:wrap;
+justify-content:center;
+gap:0;
+margin-top:40px;
+padding:10px 0 20px 0;
+}
+
+.result-card{
+width:260px;
+margin:-20px;
+border-radius:20px;
+overflow:hidden;
+border:1px solid #222;
+box-shadow:0 0 25px rgba(255,0,0,0.15);
+transform:rotate(calc(var(--r) * 1deg));
+transition:0.4s ease;
+position:relative;
+z-index:1;
+background:#111;
+will-change:transform;
+}
+
+.result-card img{
+width:100%;
+height:100%;
+min-height:320px;
+object-fit:cover;
+display:block;
+background:#000;
+}
+
+.result-card:hover{
+transform:scale(1.08) rotate(0deg);
+z-index:10;
+box-shadow:0 0 40px rgba(255,0,0,0.4);
+}
+
+.feature-grid{
+display:grid;
+grid-template-columns:repeat(2,1fr);
+gap:20px;
+margin-top:30px;
+}
+
+.feature-card{
+background:#111;
+border:1px solid #222;
+padding:20px;
+border-radius:18px;
+transition:0.3s;
+}
+
+.feature-card:hover{
+transform:translateY(-6px);
+box-shadow:0 0 20px rgba(255,0,0,0.3);
+border:1px solid #ff3b3b;
+}
+
+.feature-card strong{
+color:#00ff88;
+display:block;
+margin-bottom:8px;
+}
+
+.feature-card.last-center{
+grid-column:1 / -1;
+max-width:420px;
+width:100%;
+margin:0 auto;
+}
+
 .footer{
 text-align:center;
 color:#666;
@@ -192,6 +316,28 @@ font-size:1.1em;
 margin-bottom:40px;
 }
 
+.feature-grid{
+grid-template-columns:1fr;
+}
+
+.feature-card.last-center{
+grid-column:auto;
+max-width:none;
+margin:0;
+}
+
+.results-stack{
+gap:12px;
+}
+
+.result-card{
+width:220px;
+margin:-8px;
+}
+
+.result-card img{
+min-height:280px;
+}
 }
 
 @media(max-width:480px){
@@ -230,6 +376,22 @@ padding:30px 15px;
 
 p,li{
 font-size:0.95em;
+}
+
+.result-card{
+width:100%;
+margin:0;
+transform:none;
+}
+
+.result-card:hover{
+transform:scale(1.02);
+}
+
+.result-card img{
+min-height:auto;
+height:auto;
+object-fit:contain;
 }
 }
 </style>
@@ -308,19 +470,34 @@ PDF offert — accès instantané
 
 <h2>🚨 Ce que tu vas apprendre :</h2>
 
-<ul>
+<div class="feature-grid">
 
-<li>Les bases de l'achat-revente : comprendre le système, identifier les sources et sécuriser ses moves</li>
+<div class="feature-card">
+<strong>Les bases solides</strong>
+Comprendre le système, identifier les sources et sécuriser tes moves.
+</div>
 
-<li>Techniques professionnelles pour développer ton activité</li>
+<div class="feature-card">
+<strong>Techniques professionnelles</strong>
+Développer ton activité comme un vrai pro.
+</div>
 
-<li>Comment trouver des produits gagnants</li>
+<div class="feature-card">
+<strong>Produits gagnants</strong>
+Trouver rapidement ce qui se vend vraiment.
+</div>
 
-<li>Optimiser tes ventes pour atteindre les 5 chiffres mensuels</li>
+<div class="feature-card">
+<strong>Optimisation des ventes</strong>
+Améliorer tes résultats pour atteindre les 5 chiffres mensuels.
+</div>
 
-<li>Le plan exact pour passer de 0 à 2K puis à 20K/mois</li>
+<div class="feature-card last-center">
+<strong>Plan complet</strong>
+Passer de 0 à 2K puis à 20K/mois étape par étape.
+</div>
 
-</ul>
+</div>
 
 </div>
 
@@ -328,19 +505,131 @@ PDF offert — accès instantané
 
 <h2>🎁 Inclus dans la formation :</h2>
 
-<ul>
+<div class="feature-grid">
 
-<li>Accès à vie à tous les modules</li>
+<div class="feature-card">
+<strong>Accès à vie</strong>
+Tous les modules restent disponibles sans limite.
+</div>
 
-<li>Groupe privé d’entraide</li>
+<div class="feature-card">
+<strong>Groupe privé d’entraide</strong>
+Échange direct avec les membres et soutien au quotidien.
+</div>
 
-<li>Mises à jour gratuites à vie</li>
+<div class="feature-card">
+<strong>Mises à jour gratuites à vie</strong>
+Le contenu évolue avec les nouvelles opportunités.
+</div>
 
-<li>Stratégies + outils bonus confidentiels</li>
+<div class="feature-card">
+<strong>Stratégies + outils bonus</strong>
+Des méthodes confidentielles pour aller plus vite.
+</div>
 
-<li>Packs de factures des plus grandes marques</li>
+<div class="feature-card">
+<strong>Packs de factures</strong>
+Accès aux plus grandes marques pour t’accompagner.
+</div>
 
-</ul>
+<div class="feature-card">
+<strong>Accompagnement</strong>
+Un suivi plus humain pour t’aider à avancer plus vite et éviter les erreurs.
+</div>
+
+</div>
+
+</div>
+
+<div class="section center">
+
+<h2>👤 Qui suis-je ?</h2>
+
+<p style="max-width:650px;margin:auto;">
+Je m'appelle <strong>Arno</strong>, je suis dans l'<strong>achat-revente depuis plus de 3 ans</strong>.
+J’ai commencé <strong>de zéro</strong>, sans expérience ni connaissances.
+</p>
+
+<p style="max-width:650px;margin:auto;margin-top:15px;">
+Aujourd’hui, j’ai généré <strong>plusieurs milliers d’euros</strong> grâce à ce système.
+</p>
+
+<p style="max-width:650px;margin:auto;margin-top:15px;">
+Zone d’Ombre n’est pas juste une formation, c’est un <strong>accompagnement complet</strong> que j’ai créé pour aider ceux qui veulent <strong>faire de l’argent comme moi</strong>.
+</p>
+
+</div>
+
+<div class="section center">
+
+<h2>⚠️ Accès limité à la Zone d’Ombre</h2>
+
+<p>Toutes les candidatures ne sont pas acceptées.</p>
+
+<p>On sélectionne uniquement les profils sérieux et prêts à passer à l’action.</p>
+
+<p style="margin-top:16px;color:#00ff88;font-weight:700;">
+👉 Réponds au questionnaire pour voir si tu es éligible.
+</p>
+
+<br>
+
+<a href="https://tally.so/r/Pdp9E0" target="_blank" rel="noopener noreferrer" class="button">
+Découvrir mon éligibilité
+</a>
+
+</div>
+
+<div class="section">
+
+<h2>📸 Résultats</h2>
+
+<div class="results-stack">
+
+<div class="result-card" style="--r:-6;">
+<img src="https://res.cloudinary.com/dt8crx1kl/image/upload/v1775259239/Screenshot_20241207_185537_Vinted_zew5vd.jpg" alt="Résultat 1" loading="lazy">
+</div>
+
+<div class="result-card" style="--r:4;">
+<img src="https://res.cloudinary.com/dt8crx1kl/image/upload/v1775259238/IMG_4738_upxqim.png" alt="Résultat 2" loading="lazy">
+</div>
+
+<div class="result-card" style="--r:-3;">
+<img src="https://res.cloudinary.com/dt8crx1kl/image/upload/v1775259238/IMG_0577_mdolru.png" alt="Résultat 3" loading="lazy">
+</div>
+
+<div class="result-card" style="--r:5; z-index:5;">
+<img src="https://res.cloudinary.com/dt8crx1kl/image/upload/v1775259238/IMG_3913_wk27h2.png" alt="Résultat 4" loading="lazy">
+</div>
+
+<div class="result-card" style="--r:-4; z-index:2;">
+<img src="https://res.cloudinary.com/dt8crx1kl/image/upload/v1775259238/IMG_0257f_cjf9l3.png" alt="Résultat 5" loading="lazy">
+</div>
+
+</div>
+
+</div>
+
+<div class="section center">
+
+<h2>💬 Rejoins la communauté</h2>
+
+<p style="max-width:650px;margin:auto;">
+Rejoins la communauté privée pour échanger avec les membres et rester connecté aux dernières opportunités.
+</p>
+
+<br>
+
+<div class="community-grid">
+
+<div class="social-card">
+<a href="https://discord.gg/PsSND9uyCr" target="_blank" rel="noopener noreferrer" class="button">
+Discord
+</a>
+<p>Accède au groupe privé et échange directement avec les membres.</p>
+</div>
+
+</div>
 
 </div>
 
@@ -376,27 +665,42 @@ PDF offert — accès instantané
 
 </div>
 
+<div class="social-card">
+<a href="https://instagram.com/arno.dwe" target="_blank" rel="noopener noreferrer" class="button">
+Instagram
+</a>
+<p>Retrouve-moi aussi sur Instagram pour suivre l’actualité et garder le contact plus facilement.</p>
 </div>
 
-<div class="section center">
+</div>
 
-<h2>
-💸 Tarif d’accès :
-<span style="text-decoration:line-through;color:gray;">750€</span>
-<span style="color:#00ff88;font-size:1.4em;">→ 300€</span>
-</h2>
+<div class="section">
 
-<p>Le prix va bientôt augmenter. Tu veux rentrer dans l’ombre, ou rester dans la lumière ?</p>
+<h2>❓ Questions fréquentes</h2>
 
-<p style="margin-top:20px;color:#00ff88;font-weight:700;">
-Paiement sécurisé par carte 💳
-</p>
+<div class="reviews">
 
-<br>
+<div class="review">
+<p><strong>Est-ce que la formation est adaptée aux débutants ?</strong></p>
+<p>Oui, la formation est conçue pour être accessible à tous, même si tu pars de zéro, sans expérience ni connaissances en achat-revente.</p>
+</div>
 
-<a href="https://buy.stripe.com/eVq3cudrY9Ct2Ga7zxd7q03" target="_blank" class="button">
-Je veux accéder à Zone d’Ombre maintenant
-</a>
+<div class="review">
+<p><strong>En combien de temps peut-on obtenir ses premiers résultats ?</strong></p>
+<p>Les premiers résultats peuvent arriver rapidement. Certains atteignent déjà environ 1000€ en 30 jours, mais tout dépend de ton implication et de ta régularité.</p>
+</div>
+
+<div class="review">
+<p><strong>Est-ce que ça demande beaucoup de temps ?</strong></p>
+<p>Non, 30 minutes par jour peuvent suffire pour commencer et obtenir des résultats. L’important est d’être régulier.</p>
+</div>
+
+<div class="review">
+<p><strong>Faut-il de l’argent pour commencer ?</strong></p>
+<p>Un petit investissement peut être nécessaire pour démarrer, mais il reste accessible et adapté même si tu débutes avec peu de moyens.</p>
+</div>
+
+</div>
 
 </div>
 
