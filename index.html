@@ -375,6 +375,31 @@ iframe{
 .result-card{
   width:100%;
   max-width:260px;
+  margin:-16px;
+  border-radius:20px;
+  overflow:hidden;
+  border:1px solid #222;
+  box-shadow:0 0 25px rgba(255,0,0,0.15);
+  transform:rotate(calc(var(--r) * 1deg));
+  transition:0.4s ease;
+  position:relative;
+  z-index:1;
+  background:#111;
+}
+
+.result-card img{
+  width:100%;
+  display:block;
+  aspect-ratio:4 / 5;
+  max-height:320px;
+  object-fit:cover;
+  object-position:center top;
+  background:#000;
+}
+
+.result-card{
+  width:100%;
+  max-width:260px;
   border-radius:20px;
   overflow:hidden;
   border:1px solid #222;
@@ -647,38 +672,31 @@ iframe{
 
   .results-stack{
     display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:12px;
+    grid-template-columns:repeat(2, minmax(0, 1fr));
+    gap:10px;
     margin-top:18px;
     padding:0;
   }
 
   .result-card{
-  width:100%;
-  max-width:260px;
-  border-radius:20px;
-  overflow:hidden;
-  border:1px solid #222;
-  box-shadow:0 0 25px rgba(255,0,0,0.15);
-  transform:rotate(calc(var(--r) * 1deg));
-  transition:0.4s ease;
-  position:relative;
-  z-index:1;
-  background:#111;
-}
+    width:100%;
+    max-width:none;
+    margin:0;
+    transform:none !important;
+    border-radius:16px;
+  }
 
   .result-card:hover{
-    transform:translateY(-4px) scale(1.01) !important;
+    transform:translateY(-2px) scale(1.01) !important;
   }
 
   .result-card img{
-  width:100%;
-  height:100%;
-  max-height:320px;
-  object-fit:cover;
-  display:block;
-  background:#000;
-}
+    aspect-ratio:3 / 4;
+    max-height:none;
+    height:auto;
+    object-fit:cover;
+    object-position:center top;
+  }
 
   .social-card{
     max-width:none;
@@ -790,7 +808,17 @@ iframe{
 }
 
   .results-stack{
-    grid-template-columns:1fr;
+    grid-template-columns:1fr 1fr;
+    gap:8px;
+  }
+
+  .result-card{
+    border-radius:14px;
+  }
+
+  .result-card img{
+    aspect-ratio:1 / 1.28;
+    object-position:center;
   }
 
   iframe{
@@ -806,6 +834,25 @@ iframe{
   h1{
     font-size:1.78rem;
   }
+
+  h2{
+    font-size:1.28rem;
+  }
+
+  .button{
+    min-height:48px;
+    padding:13px 14px;
+    font-size:.94rem;
+  }
+
+  .results-stack{
+    grid-template-columns:1fr;
+  }
+
+  .result-card img{
+    aspect-ratio:4 / 5;
+  }
+}
 
   h2{
     font-size:1.28rem;
@@ -984,31 +1031,36 @@ iframe{
   <div class="container">
     <div class="section-head">
       <span class="eyebrow">Programme</span>
-      <h2>🚨 Ce que tu vas apprendre</h2>
-      <p>Un cadre clair, premium et structuré pour lancer ton activité et passer à un niveau supérieur.</p>
-    </div>
+      <h2>🚨 Ce que tu vas apprendre :
 
-    <div class="feature-grid fade-up">
-      <div class="feature-card">
-        <strong>Les bases solides</strong>
-        Comprendre le système, identifier les sources et sécuriser tes moves.
-      </div>
-      <div class="feature-card">
-        <strong>Techniques professionnelles</strong>
-        Développer ton activité comme un vrai pro.
-      </div>
-      <div class="feature-card">
-        <strong>Produits gagnants</strong>
-        Trouver rapidement ce qui se vend vraiment.
-      </div>
-      <div class="feature-card">
-        <strong>Optimisation des ventes</strong>
-        Améliorer tes résultats pour atteindre les 5 chiffres mensuels.
-      </div>
-      <div class="feature-card last-center">
-        <strong>Plan complet</strong>
-        Passer de 0 à 2K puis à 20K/mois étape par étape.
-      </div>
+<div class="feature-grid">
+
+<div class="feature-card">
+<strong>Les bases solides</strong>
+Comprendre le système, identifier les sources et sécuriser tes moves.
+</div>
+
+<div class="feature-card">
+<strong>Techniques professionnelles</strong>
+Développer ton activité comme un vrai pro.
+</div>
+
+<div class="feature-card">
+<strong>Produits gagnants</strong>
+Trouver rapidement ce qui se vend vraiment.
+</div>
+
+<div class="feature-card">
+<strong>Optimisation des ventes</strong>
+Améliorer tes résultats pour atteindre les 5 chiffres mensuels.
+</div>
+
+<div class="feature-card last-center">
+<strong>Plan complet</strong>
+Passer de 0 à 2K puis à 20K/mois étape par étape.
+</div>
+
+</div>
     </div>
   </div>
 </section>
