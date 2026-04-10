@@ -373,24 +373,23 @@ iframe{
 }
 
 .result-card{
-  width:250px;
-  margin:-16px;
-  border-radius:22px;
+  width:100%;
+  max-width:260px;
+  border-radius:20px;
   overflow:hidden;
   border:1px solid #222;
-  box-shadow:0 0 25px rgba(255,0,0,0.14);
+  box-shadow:0 0 25px rgba(255,0,0,0.15);
   transform:rotate(calc(var(--r) * 1deg));
-  transition:.4s ease;
+  transition:0.4s ease;
   position:relative;
   z-index:1;
   background:#111;
-  will-change:transform;
 }
 
 .result-card img{
   width:100%;
   height:100%;
-  min-height:320px;
+  max-height:320px;
   object-fit:cover;
   display:block;
   background:#000;
@@ -513,29 +512,348 @@ iframe{
 }
 
 @media(max-width:768px){
-  .hero{min-height:auto;padding-bottom:70px}
-  .hero-grid,.grid-3,.grid-2,.stats,.feature-grid{grid-template-columns:1fr;}
-  .hero-copy,.hero-card,.price-card{padding:22px}
-  .hero-points{grid-template-columns:1fr}
-  .feature-card.last-center{grid-column:auto;max-width:none;margin:0}
-  .price-main{font-size:2.5rem}
-  .result-card{width:220px;margin:-8px}
-  .result-card img{min-height:280px}
-  .button{padding:14px 28px;font-size:1.05rem}
-  p,li{font-size:1rem}
+  .hero{
+    min-height:auto;
+    padding:8px 0 54px;
+  }
+
+  .nav{
+    padding:14px 0;
+    gap:12px;
+    align-items:center;
+  }
+
+  .logo{
+    gap:10px;
+    font-size:.95rem;
+  }
+
+  .logo-mark{
+    width:34px;
+    height:34px;
+    border-radius:12px;
+  }
+
+  .hero-grid,.grid-3,.grid-2,.stats,.feature-grid{
+    grid-template-columns:1fr;
+    gap:18px;
+  }
+
+  .hero-copy,.hero-card,.price-card,.video-shell,.guide-box,.card,.feature-card,.review,.faq-item,.social-card,.about-box,.stat{
+    padding:20px;
+    border-radius:22px;
+  }
+
+  .hero-copy{
+    order:1;
+  }
+
+  .hero-card{
+    order:2;
+  }
+
+  .hero-points{
+    grid-template-columns:1fr;
+    gap:12px;
+    margin:22px 0 24px;
+  }
+
+  .point{
+    padding:13px 14px;
+    font-size:.95rem;
+  }
+
+  .cta-row{
+    flex-direction:column;
+    align-items:stretch;
+    gap:12px;
+  }
+
+  .button{
+    width:100%;
+    min-height:52px;
+    padding:14px 18px;
+    font-size:1rem;
+  }
+
+  .button-secondary{
+    min-height:50px;
+  }
+
+  .price-top{
+    flex-direction:column;
+    align-items:flex-start;
+    gap:8px;
+  }
+
+  .price-main{
+    font-size:2.35rem;
+    line-height:1;
+  }
+
+  .offer-list{
+    gap:10px;
+    margin:18px 0;
+  }
+
+  .offer-item{
+    padding:12px 13px;
+    border-radius:14px;
+    font-size:.95rem;
+  }
+
+  .stats{
+    margin-top:18px;
+  }
+
+  .stat h3{
+    font-size:1.9rem;
+  }
+
+  .section{
+    padding:64px 0;
+  }
+
+  .section-tight{
+    padding-top:18px;
+  }
+
+  .section-head{
+    margin:0 auto 24px;
+  }
+
+  .section-head p,
+  p,li{
+    font-size:1rem;
+  }
+
+  iframe{
+    width:100%;
+    aspect-ratio:16/9;
+    height:auto;
+    min-height:0;
+    border-radius:18px;
+  }
+
+  .video-shell{
+    padding:12px;
+  }
+
+  .feature-card.last-center{
+    grid-column:auto;
+    max-width:none;
+    margin:0;
+  }
+
+  .results-stack{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:12px;
+    margin-top:18px;
+    padding:0;
+  }
+
+  .result-card{
+  width:100%;
+  max-width:260px;
+  border-radius:20px;
+  overflow:hidden;
+  border:1px solid #222;
+  box-shadow:0 0 25px rgba(255,0,0,0.15);
+  transform:rotate(calc(var(--r) * 1deg));
+  transition:0.4s ease;
+  position:relative;
+  z-index:1;
+  background:#111;
+}
+
+  .result-card:hover{
+    transform:translateY(-4px) scale(1.01) !important;
+  }
+
+  .result-card img{
+  width:100%;
+  height:100%;
+  max-height:320px;
+  object-fit:cover;
+  display:block;
+  background:#000;
+}
+
+  .social-card{
+    max-width:none;
+    margin:22px 0 0;
+  }
+
+  .reviews{
+    gap:16px;
+    margin-top:18px;
+  }
 }
 
 @media(max-width:480px){
-  .container{width:min(var(--max), calc(100% - 20px));}
+  .container{
+    width:min(var(--max), calc(100% - 16px));
+  }
+
+  h1{
+    font-size:2rem;
+    line-height:1.02;
+  }
+
+  h2{
+    font-size:1.45rem;
+    line-height:1.12;
+    margin-bottom:12px;
+  }
+
+  h3{
+    font-size:1.05rem;
+  }
+
+  .badge{
+    width:100%;
+    justify-content:center;
+    text-align:center;
+    line-height:1.35;
+    padding:10px 12px;
+    font-size:.84rem;
+  }
+
+  .nav{
+    flex-direction:column;
+    align-items:stretch;
+  }
+
+  .logo{
+    justify-content:center;
+  }
+
+  .hero-copy,.hero-card,.price-card,.video-shell,.guide-box,.card,.feature-card,.review,.faq-item,.social-card,.about-box,.stat{
+    padding:16px;
+    border-radius:18px;
+  }
+
+  .lead{
+    font-size:.99rem;
+    margin-top:16px;
+  }
+
+  .micro{
+    font-size:.84rem;
+    line-height:1.45;
+  }
+
+  .price-main{
+    font-size:2rem;
+  }
+
+  .price-old,
+  .price-note{
+    font-size:.9rem;
+  }
+
+  .stock-top{
+    font-size:.86rem;
+  }
+
+  .stats{
+    grid-template-columns:1fr;
+    gap:12px;
+  }
+
+  .stat h3{
+    font-size:1.7rem;
+  }
+
+  .result-card{
+  width:100%;
+  max-width:260px;
+  border-radius:20px;
+  overflow:hidden;
+  border:1px solid #222;
+  box-shadow:0 0 25px rgba(255,0,0,0.15);
+  transform:rotate(calc(var(--r) * 1deg));
+  transition:0.4s ease;
+  position:relative;
+  z-index:1;
+  background:#111;
+}
+
+  .result-card img{
+  width:100%;
+  height:100%;
+  max-height:320px;
+  object-fit:cover;
+  display:block;
+  background:#000;
+}
+
+  .results-stack{
+    grid-template-columns:1fr;
+  }
+
+  iframe{
+    border-radius:16px;
+  }
+
+  .button{
+    font-size:.98rem;
+  }
+}
+
+@media(max-width:380px){
+  h1{
+    font-size:1.78rem;
+  }
+
+  h2{
+    font-size:1.28rem;
+  }
+
+  .button{
+    min-height:48px;
+    padding:13px 14px;
+    font-size:.94rem;
+  }
+
+  .result-card img{
+  width:100%;
+  height:100%;
+  max-height:320px;
+  object-fit:cover;
+  display:block;
+  background:#000;
+}
+}
   h1{font-size:2.15rem}
   h2{font-size:1.35rem}
   .nav{padding:16px 0}
   .button{width:100%;padding:12px 0;font-size:1rem}
   .cta-row{flex-direction:column;align-items:stretch}
   .price-top{flex-direction:column;align-items:flex-start}
-  .result-card{width:100%;margin:0;transform:none}
+  .result-card{
+  width:100%;
+  max-width:260px;
+  border-radius:20px;
+  overflow:hidden;
+  border:1px solid #222;
+  box-shadow:0 0 25px rgba(255,0,0,0.15);
+  transform:rotate(calc(var(--r) * 1deg));
+  transition:0.4s ease;
+  position:relative;
+  z-index:1;
+  background:#111;
+}
   .result-card:hover{transform:scale(1.02)}
-  .result-card img{min-height:auto;height:auto;object-fit:contain}
+  .result-card img{
+  width:100%;
+  height:100%;
+  max-height:320px;
+  object-fit:cover;
+  display:block;
+  background:#000;
+}
 }
 </style>
 </head>
@@ -699,7 +1017,7 @@ iframe{
   <div class="container">
     <div class="section-head">
       <span class="eyebrow">Inclus</span>
-      <h2>🎁 Tout ce que tu reçois dans l’aaccompagnementment</h2>
+      <h2>🎁 Tout ce que tu reçois dans l’accompagnement</h2>
     </div>
 
     <div class="grid-3 fade-up">
@@ -811,7 +1129,7 @@ iframe{
       </div>
       <div class="review">
         <div class="stars">★★★★★</div>
-        <p>Le groupe privé vaut déjà le prix de l’aaccompagnementment. On peut poser des questions et il y a toujours quelqu’un pour répondre.</p>
+        <p>Le groupe privé vaut déjà le prix de l’accompagnement. On peut poser des questions et il y a toujours quelqu’un pour répondre.</p>
         <div class="review-name">— Mehdi R.</div>
       </div>
       <div class="review">
@@ -837,8 +1155,8 @@ iframe{
 
     <div class="reviews fade-up">
       <div class="faq-item">
-        <p><strong>Est-ce que l’aaccompagnementment est adaptée aux débutants ?</strong></p>
-        <p>Oui, l’aaccompagnementment est conçue pour être accessible à tous, même si tu pars de zéro, sans expérience ni connaissances en achat-revente.</p>
+        <p><strong>Est-ce que l’accompagnement est adaptée aux débutants ?</strong></p>
+        <p>Oui, l’accompagnement est conçue pour être accessible à tous, même si tu pars de zéro, sans expérience ni connaissances en achat-revente.</p>
       </div>
       <div class="faq-item">
         <p><strong>En combien de temps peut-on obtenir ses premiers résultats ?</strong></p>
