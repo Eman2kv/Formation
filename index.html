@@ -58,18 +58,27 @@ transform:scale(1.01);
 }
 
 .button{
-display:inline-block;
+display:inline-flex;
+align-items:center;
+justify-content:center;
 background:linear-gradient(135deg,#ff3b3b,#ff0000);
-padding:16px 36px;
-border-radius:50px;
+padding:20px 52px;
+border-radius:60px;
 text-decoration:none;
 color:white;
-font-weight:bold;
-font-size:1.2em;
-transition:0.3s;
+font-weight:700;
+font-size:1.3em;
+letter-spacing:0.5px;
+transition:0.35s;
 text-align:center;
 position:relative;
 overflow:hidden;
+min-width:320px;
+box-shadow:
+0 0 25px rgba(255,0,0,0.35),
+0 10px 35px rgba(255,0,0,0.25);
+border:1px solid rgba(255,255,255,0.08);
+backdrop-filter:blur(6px);
 }
 
 .button::before{
@@ -79,7 +88,12 @@ top:0;
 left:-75%;
 width:50%;
 height:100%;
-background:linear-gradient(120deg, transparent, rgba(255,255,255,0.45), transparent);
+background:linear-gradient(
+120deg,
+transparent,
+rgba(255,255,255,0.55),
+transparent
+);
 transform:skewX(-25deg);
 animation:shine 3s infinite;
 pointer-events:none;
@@ -92,8 +106,10 @@ pointer-events:none;
 }
 
 .button:hover{
-transform:scale(1.08);
-box-shadow:0 0 25px rgba(255,0,0,0.8);
+transform:translateY(-3px) scale(1.06);
+box-shadow:
+0 0 35px rgba(255,0,0,0.65),
+0 15px 45px rgba(255,0,0,0.35);
 }
 
 .social-card{
@@ -202,7 +218,6 @@ font-size:0.9em;
 margin-top:10px;
 }
 
-/* Résultats stylés */
 .results-stack{
 display:flex;
 flex-wrap:wrap;
@@ -283,7 +298,6 @@ margin-top:60px;
 font-size:14px;
 }
 
-/* Optimisation mobile */
 @media(max-width:768px){
 
 iframe{
@@ -308,8 +322,9 @@ font-size:1em;
 }
 
 .button{
-padding:14px 28px;
-font-size:1.1em;
+padding:18px 36px;
+font-size:1.15em;
+min-width:260px;
 }
 
 .section{
@@ -365,9 +380,9 @@ padding:12px;
 
 .button{
 width:100%;
-text-align:center;
-padding:12px 0;
-font-size:1em;
+min-width:100%;
+padding:18px 20px;
+font-size:1.1em;
 }
 
 .container{
@@ -412,12 +427,12 @@ object-fit:contain;
 <div class="stats">
 
 <div class="stat">
-<h3 class="counter" data-target="45" data-suffix="">0</h3>
+<h3 class="counter" data-target="71" data-suffix="">0</h3>
 <p>Élèves formés</p>
 </div>
 
 <div class="stat">
-<h3 class="counter" data-target="100000" data-suffix="€">0€</h3>
+<h3 class="counter" data-target="180000" data-suffix="€">0€</h3>
 <p>Chiffre d'affaires généré</p>
 </div>
 
@@ -567,13 +582,13 @@ Zone d’Ombre n’est pas juste une formation, c’est un <strong>accompagnemen
 <p>On sélectionne uniquement les profils sérieux et prêts à passer à l’action.</p>
 
 <p style="margin-top:16px;color:#00ff88;font-weight:700;">
-👉 Réponds au questionnaire pour voir si tu es éligible.
+👉 Contacte-moi directement sur WhatsApp.
 </p>
 
 <br>
 
-<a href="https://tally.so/r/Pdp9E0" target="_blank" rel="noopener noreferrer" class="button">
-Découvrir mon éligibilité
+<a href="https://wa.me/33786705803" target="_blank" rel="noopener noreferrer" class="button">
+💬 Contacte-moi sur WhatsApp
 </a>
 
 </div>
