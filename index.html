@@ -1,797 +1,944 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Zone d’Ombre – Formation Achat-Revente</title>
-
-<style>
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
-
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-}
-
-body{
-background:#0a0a0a;
-color:#f2f2f2;
-font-family:'Inter',sans-serif;
-line-height:1.6;
-}
-
-.container{
-max-width:900px;
-margin:auto;
-padding:60px 20px;
-}
-
-h1{
-font-size:3em;
-text-align:center;
-margin-bottom:10px;
-}
-
-h2{
-color:#ff3b3b;
-text-align:center;
-margin-bottom:20px;
-}
-
-p,li{
-color:#d3d3d3;
-font-size:1.1em;
-}
-
-.center{
-text-align:center;
-}
-
-.section{
-margin-bottom:60px;
-transition:0.3s;
-}
-
-.section:hover{
-transform:scale(1.01);
-}
-
-.button{
-display:inline-flex;
-align-items:center;
-justify-content:center;
-background:linear-gradient(135deg,#ff3b3b,#ff0000);
-padding:20px 52px;
-border-radius:60px;
-text-decoration:none;
-color:white;
-font-weight:700;
-font-size:1.3em;
-letter-spacing:0.5px;
-transition:0.35s;
-text-align:center;
-position:relative;
-overflow:hidden;
-min-width:320px;
-box-shadow:
-0 0 25px rgba(255,0,0,0.35),
-0 10px 35px rgba(255,0,0,0.25);
-border:1px solid rgba(255,255,255,0.08);
-backdrop-filter:blur(6px);
-}
-
-.button::before{
-content:"";
-position:absolute;
-top:0;
-left:-75%;
-width:50%;
-height:100%;
-background:linear-gradient(
-120deg,
-transparent,
-rgba(255,255,255,0.55),
-transparent
-);
-transform:skewX(-25deg);
-animation:shine 3s infinite;
-pointer-events:none;
-}
-
-@keyframes shine{
-0%{left:-75%;}
-50%{left:125%;}
-100%{left:125%;}
-}
-
-.button:hover{
-transform:translateY(-3px) scale(1.06);
-box-shadow:
-0 0 35px rgba(255,0,0,0.65),
-0 15px 45px rgba(255,0,0,0.35);
-}
-
-.social-card{
-background:#111;
-border:1px solid #222;
-border-radius:18px;
-padding:24px 18px;
-text-align:center;
-transition:0.35s;
-max-width:520px;
-margin:30px auto 0 auto;
-}
-
-.social-card:hover{
-transform:translateY(-6px);
-box-shadow:0 0 20px rgba(255,0,0,0.25);
-border:1px solid #ff3b3b;
-}
-
-.social-card p{
-font-size:0.95em;
-color:#a8a8a8;
-margin-top:12px;
-}
-
-.community-grid{
-display:grid;
-grid-template-columns:1fr;
-gap:20px;
-margin-top:30px;
-}
-
-iframe{
-width:100%;
-height:480px;
-border-radius:20px;
-box-shadow:0 0 20px rgba(255,0,0,0.2);
-}
-
-.stats{
-display:grid;
-grid-template-columns:repeat(4,1fr);
-gap:15px;
-margin-top:30px;
-}
-
-.stat{
-background:#111;
-padding:20px;
-border-radius:15px;
-text-align:center;
-transition:0.35s;
-cursor:default;
-display:flex;
-flex-direction:column;
-align-items:center;
-justify-content:center;
-}
-
-.stat:hover{
-transform:translateY(-8px) scale(1.05);
-box-shadow:0 0 25px rgba(255,0,0,0.5);
-border:1px solid #ff0000;
-}
-
-.stat h3{
-color:#00ff88;
-font-size:28px;
-word-break:break-word;
-transition:transform 0.3s ease,text-shadow 0.3s ease;
-}
-
-.stat.animate h3{
-transform:scale(1.08);
-text-shadow:0 0 18px rgba(0,255,136,0.45);
-}
-
-.reviews{
-display:grid;
-gap:20px;
-margin-top:30px;
-}
-
-.review{
-background:#111;
-padding:20px;
-border-radius:15px;
-border:1px solid #222;
-transition:0.35s;
-}
-
-.review:hover{
-transform:translateY(-6px) scale(1.03);
-box-shadow:0 0 20px rgba(255,0,0,0.4);
-border:1px solid #ff0000;
-}
-
-.stars{
-color:gold;
-margin-bottom:10px;
-}
-
-.review-name{
-color:#999;
-font-size:0.9em;
-margin-top:10px;
-}
-
-.results-stack{
-display:flex;
-flex-wrap:wrap;
-justify-content:center;
-gap:0;
-margin-top:40px;
-padding:10px 0 20px 0;
-}
-
-.result-card{
-width:260px;
-margin:-20px;
-border-radius:20px;
-overflow:hidden;
-border:1px solid #222;
-box-shadow:0 0 25px rgba(255,0,0,0.15);
-transform:rotate(calc(var(--r) * 1deg));
-transition:0.4s ease;
-position:relative;
-z-index:1;
-background:#111;
-will-change:transform;
-}
-
-.result-card img{
-width:100%;
-height:100%;
-min-height:320px;
-object-fit:cover;
-display:block;
-background:#000;
-}
-
-.result-card:hover{
-transform:scale(1.08) rotate(0deg);
-z-index:10;
-box-shadow:0 0 40px rgba(255,0,0,0.4);
-}
-
-.feature-grid{
-display:grid;
-grid-template-columns:repeat(2,1fr);
-gap:20px;
-margin-top:30px;
-}
-
-.feature-card{
-background:#111;
-border:1px solid #222;
-padding:20px;
-border-radius:18px;
-transition:0.3s;
-}
-
-.feature-card:hover{
-transform:translateY(-6px);
-box-shadow:0 0 20px rgba(255,0,0,0.3);
-border:1px solid #ff3b3b;
-}
-
-.feature-card strong{
-color:#00ff88;
-display:block;
-margin-bottom:8px;
-}
-
-.feature-card.last-center{
-grid-column:1 / -1;
-max-width:420px;
-width:100%;
-margin:0 auto;
-}
-
-.footer{
-text-align:center;
-color:#666;
-margin-top:60px;
-font-size:14px;
-}
-
-@media(max-width:768px){
-
-iframe{
-height:250px;
-}
-
-.stats{
-grid-template-columns:repeat(2,1fr);
-gap:15px;
-}
-
-.stat h3{
-font-size:22px;
-}
-
-.review{
-padding:15px;
-}
-
-p,li{
-font-size:1em;
-}
-
-.button{
-padding:18px 36px;
-font-size:1.15em;
-min-width:260px;
-}
-
-.section{
-margin-bottom:40px;
-}
-
-.feature-grid{
-grid-template-columns:1fr;
-}
-
-.feature-card.last-center{
-grid-column:auto;
-max-width:none;
-margin:0;
-}
-
-.results-stack{
-gap:12px;
-}
-
-.result-card{
-width:220px;
-margin:-8px;
-}
-
-.result-card img{
-min-height:280px;
-}
-}
-
-@media(max-width:480px){
-
-h1{
-font-size:2em;
-}
-
-h2{
-font-size:1.2em;
-}
-
-.stats{
-grid-template-columns:1fr;
-gap:12px;
-}
-
-.stat h3{
-font-size:20px;
-}
-
-.review{
-padding:12px;
-}
-
-.button{
-width:100%;
-min-width:100%;
-padding:18px 20px;
-font-size:1.1em;
-}
-
-.container{
-padding:30px 15px;
-}
-
-p,li{
-font-size:0.95em;
-}
-
-.result-card{
-width:100%;
-margin:0;
-transform:none;
-}
-
-.result-card:hover{
-transform:scale(1.02);
-}
-
-.result-card img{
-min-height:auto;
-height:auto;
-object-fit:contain;
-}
-}
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Zone d'Ombre — accompagnement privé pour apprendre l'achat-revente de pièces de luxe sur Vinted." />
+  <title>Zone d'Ombre — Accompagnement Vinted Luxe</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Playfair+Display:wght@700;800;900&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg:#050505;
+      --bg-soft:#0b0b0d;
+      --card:#111114;
+      --card-2:#16161a;
+      --white:#ffffff;
+      --text:#f5f5f7;
+      --muted:#a4a4ad;
+      --muted-2:#73737d;
+      --red:#ff2b2b;
+      --red-dark:#9d0000;
+      --green:#00ff88;
+      --green-dark:#009e5a;
+      --gold:#d8b878;
+      --line:rgba(255,255,255,.10);
+      --line-strong:rgba(255,255,255,.18);
+      --shadow-red:0 28px 90px rgba(255,43,43,.22);
+      --shadow-green:0 28px 90px rgba(0,255,136,.16);
+      --radius:28px;
+      --max:1180px;
+    }
+
+    *{margin:0;padding:0;box-sizing:border-box;}
+    html{scroll-behavior:smooth;}
+    body{
+      font-family:'Inter',sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(circle at 8% 8%, rgba(255,43,43,.18), transparent 28%),
+        radial-gradient(circle at 92% 14%, rgba(0,255,136,.10), transparent 25%),
+        radial-gradient(circle at 50% 100%, rgba(255,43,43,.08), transparent 30%),
+        var(--bg);
+      overflow-x:hidden;
+    }
+
+    body::before{
+      content:"";
+      position:fixed;
+      inset:0;
+      z-index:-4;
+      pointer-events:none;
+      background-image:
+        linear-gradient(rgba(255,255,255,.034) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.034) 1px, transparent 1px);
+      background-size:72px 72px;
+      mask-image:radial-gradient(circle at center, black 0%, transparent 78%);
+      opacity:.42;
+    }
+
+    body::after{
+      content:"";
+      position:fixed;
+      inset:0;
+      z-index:-3;
+      pointer-events:none;
+      background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='190' height='190'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.75' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='190' height='190' filter='url(%23n)' opacity='.55'/%3E%3C/svg%3E");
+      opacity:.043;
+    }
+
+    a{color:inherit;}
+    img{display:block;max-width:100%;}
+    button,input{font:inherit;}
+
+    .container{width:min(var(--max), calc(100% - 40px));margin:0 auto;}
+    section{position:relative;padding:108px 0;}
+
+    .progress{
+      position:fixed;
+      top:0;
+      left:0;
+      height:3px;
+      width:0;
+      z-index:999;
+      background:linear-gradient(90deg,var(--red),var(--green));
+      box-shadow:0 0 24px rgba(255,43,43,.65);
+    }
+
+    .top-banner{
+      position:fixed;
+      top:0;
+      left:0;
+      right:0;
+      z-index:100;
+      height:38px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:0 14px;
+      background:linear-gradient(90deg, rgba(255,43,43,.94), rgba(80,0,0,.92), rgba(0,255,136,.72));
+      color:#fff;
+      font-size:.82rem;
+      font-weight:900;
+      letter-spacing:.01em;
+      text-align:center;
+    }
+
+    .nav{
+      position:fixed;
+      top:54px;
+      left:50%;
+      transform:translateX(-50%);
+      z-index:99;
+      width:min(1100px, calc(100% - 28px));
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:18px;
+      padding:12px 14px 12px 18px;
+      border:1px solid rgba(255,255,255,.11);
+      border-radius:999px;
+      background:rgba(7,7,8,.72);
+      backdrop-filter:blur(22px);
+      box-shadow:0 22px 80px rgba(0,0,0,.38);
+    }
+
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      text-decoration:none;
+      font-weight:950;
+      letter-spacing:.10em;
+      text-transform:uppercase;
+      white-space:nowrap;
+    }
+
+    .brand-mark{
+      width:38px;
+      height:38px;
+      border-radius:50%;
+      display:grid;
+      place-items:center;
+      background:
+        radial-gradient(circle at 30% 25%, var(--green), transparent 30%),
+        linear-gradient(135deg,#1b1b1f,#080808);
+      color:var(--red);
+      border:1px solid rgba(255,255,255,.17);
+      box-shadow:0 0 28px rgba(255,43,43,.22);
+      font-weight:950;
+    }
+
+    .nav-links{display:flex;align-items:center;gap:20px;color:var(--muted);font-size:.9rem;font-weight:800;}
+    .nav-links a{text-decoration:none;transition:.25s ease;}
+    .nav-links a:hover{color:#fff;}
+
+    .btn{
+      position:relative;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:10px;
+      min-height:58px;
+      padding:18px 30px;
+      border:1px solid transparent;
+      border-radius:999px;
+      text-decoration:none;
+      font-weight:950;
+      letter-spacing:-.01em;
+      overflow:hidden;
+      isolation:isolate;
+      transition:.32s ease;
+      cursor:pointer;
+    }
+
+    .nav .btn{min-height:44px;padding:12px 18px;font-size:.9rem;}
+
+    .btn::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      z-index:-1;
+      transform:translateX(-140%) skewX(-24deg);
+      background:linear-gradient(90deg, transparent, rgba(255,255,255,.58), transparent);
+      animation:shine 4.2s infinite;
+    }
+
+    @keyframes shine{
+      0%,42%{transform:translateX(-140%) skewX(-24deg);}
+      70%,100%{transform:translateX(150%) skewX(-24deg);}
+    }
+
+    .btn-primary{
+      color:#fff;
+      background:linear-gradient(135deg,var(--red),#ff0000 48%,var(--red-dark));
+      box-shadow:0 18px 55px rgba(255,0,0,.32), inset 0 0 0 1px rgba(255,255,255,.08);
+    }
+    .btn-primary:hover{transform:translateY(-4px) scale(1.025);box-shadow:0 24px 80px rgba(255,0,0,.48);}
+
+    .btn-green{
+      color:#03120a;
+      background:linear-gradient(135deg,var(--green),#00d977,var(--green-dark));
+      box-shadow:0 18px 55px rgba(0,255,136,.25), inset 0 0 0 1px rgba(255,255,255,.18);
+    }
+    .btn-green:hover{transform:translateY(-4px) scale(1.025);box-shadow:0 24px 80px rgba(0,255,136,.36);}
+
+    .btn-ghost{
+      color:#fff;
+      background:rgba(255,255,255,.045);
+      border-color:var(--line);
+      backdrop-filter:blur(16px);
+    }
+    .btn-ghost:hover{transform:translateY(-4px);border-color:rgba(0,255,136,.46);box-shadow:var(--shadow-green);}
+
+    .eyebrow{
+      display:inline-flex;
+      align-items:center;
+      gap:9px;
+      padding:10px 15px;
+      border:1px solid var(--line);
+      border-radius:999px;
+      background:rgba(255,255,255,.045);
+      color:#dedee3;
+      font-size:.88rem;
+      font-weight:900;
+      backdrop-filter:blur(18px);
+      box-shadow:inset 0 0 26px rgba(255,255,255,.03);
+    }
+
+    .dot{width:8px;height:8px;border-radius:50%;background:var(--green);box-shadow:0 0 18px var(--green);}
+    .red-dot{background:var(--red);box-shadow:0 0 18px var(--red);}
+
+    .gradient-text{
+      background:linear-gradient(95deg,#fff 0%,#ffd0d0 24%,var(--red) 45%,var(--green) 78%,#fff 100%);
+      -webkit-background-clip:text;
+      background-clip:text;
+      color:transparent;
+    }
+
+    .glass{
+      background:linear-gradient(180deg,rgba(255,255,255,.068),rgba(255,255,255,.026));
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      backdrop-filter:blur(18px);
+      box-shadow:0 26px 90px rgba(0,0,0,.36);
+    }
+
+    .hero{
+      min-height:100vh;
+      display:flex;
+      align-items:center;
+      padding:170px 0 92px;
+    }
+
+    .hero-grid{
+      display:grid;
+      grid-template-columns:1.05fr .95fr;
+      gap:44px;
+      align-items:center;
+    }
+
+    .hero h1{
+      margin-top:22px;
+      font-size:clamp(3.15rem,6vw,6.75rem);
+      line-height:.91;
+      letter-spacing:-.083em;
+      font-weight:950;
+    }
+
+    .hero h1 .serif{
+      display:block;
+      font-family:'Playfair Display',serif;
+      font-style:italic;
+      letter-spacing:-.045em;
+      font-weight:900;
+    }
+
+    .hero-lead{
+      max-width:720px;
+      margin-top:28px;
+      color:#d4d4da;
+      font-size:clamp(1.04rem,1.38vw,1.24rem);
+      line-height:1.78;
+    }
+
+    .hero-actions{display:flex;flex-wrap:wrap;gap:14px;margin-top:34px;}
+
+    .trust-row{
+      display:flex;
+      align-items:center;
+      gap:14px;
+      margin-top:26px;
+      color:var(--muted);
+      font-size:.94rem;
+      font-weight:750;
+      flex-wrap:wrap;
+    }
+
+    .avatars{display:flex;}
+    .avatar{
+      width:36px;height:36px;border-radius:50%;
+      display:grid;place-items:center;
+      margin-left:-9px;
+      border:2px solid #080808;
+      background:linear-gradient(135deg,#232329,#0f0f10);
+      color:#fff;font-weight:950;font-size:.75rem;
+    }
+    .avatar:first-child{margin-left:0;background:linear-gradient(135deg,var(--red),#410000);}
+    .avatar:nth-child(2){background:linear-gradient(135deg,var(--green),#034d2d);color:#06120c;}
+    .avatar:nth-child(3){background:linear-gradient(135deg,var(--gold),#39260b);}
+
+    .hero-visual{position:relative;min-height:655px;perspective:1000px;}
+    .orb{
+      position:absolute;
+      width:520px;height:520px;
+      top:50px;right:18px;
+      border-radius:50%;
+      background:radial-gradient(circle,rgba(255,43,43,.36),transparent 62%);
+      filter:blur(22px);
+      animation:float 6s ease-in-out infinite;
+    }
+
+    .phone-stage{position:absolute;inset:60px 0 auto auto;width:min(500px,100%);height:570px;transform-style:preserve-3d;}
+    .phone-card{
+      position:absolute;
+      width:255px;
+      height:518px;
+      border-radius:40px;
+      overflow:hidden;
+      background:#101012;
+      border:1px solid rgba(255,255,255,.13);
+      box-shadow:0 42px 120px rgba(0,0,0,.56),0 0 50px rgba(255,43,43,.18);
+      transition:.55s ease;
+    }
+    .phone-card img{width:100%;height:100%;object-fit:cover;filter:saturate(1.1) contrast(1.04);}
+    .phone-card::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 40%,rgba(0,0,0,.78));pointer-events:none;}
+    .phone-card.one{right:135px;top:0;z-index:3;transform:rotate(-8deg) translateZ(40px);animation:float 6s ease-in-out infinite;}
+    .phone-card.two{right:0;top:92px;z-index:2;transform:rotate(9deg);animation:float 7s ease-in-out infinite reverse;}
+    .phone-card.three{right:265px;top:134px;z-index:1;opacity:.76;transform:rotate(-17deg) scale(.86);animation:float 8s ease-in-out infinite;}
+    .phone-card:hover{z-index:8;transform:rotate(0) scale(1.04) translateZ(70px);}
+
+    .floating-ticket{
+      position:absolute;
+      z-index:9;
+      padding:16px 18px;
+      border:1px solid rgba(255,255,255,.13);
+      border-radius:22px;
+      background:rgba(14,14,17,.80);
+      backdrop-filter:blur(18px);
+      box-shadow:0 18px 65px rgba(0,0,0,.46);
+      animation:float 5.5s ease-in-out infinite;
+    }
+    .ticket-top{right:8px;top:32px;}
+    .ticket-mid{left:14px;top:235px;animation-delay:-1.6s;}
+    .ticket-bottom{left:38px;bottom:66px;animation-delay:-2.4s;}
+    .ticket-label{color:var(--muted);font-size:.76rem;font-weight:900;text-transform:uppercase;letter-spacing:.10em;}
+    .ticket-value{margin-top:4px;color:var(--green);font-size:1.28rem;font-weight:950;letter-spacing:-.04em;}
+    .ticket-value.red{color:var(--red);}
+
+    @keyframes float{0%,100%{translate:0 0;}50%{translate:0 -18px;}}
+
+    .stats-bar{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:30px;}
+    .stat{position:relative;overflow:hidden;padding:24px;border-radius:24px;transform-style:preserve-3d;}
+    .stat::before{content:"";position:absolute;inset:-1px;background:radial-gradient(circle at var(--x,50%) var(--y,50%),rgba(255,43,43,.28),transparent 33%);opacity:0;transition:.25s;}
+    .stat:hover::before{opacity:1;}
+    .stat h3{position:relative;color:var(--green);font-size:2rem;font-weight:950;letter-spacing:-.04em;}
+    .stat p{position:relative;margin-top:6px;color:var(--muted);font-size:.92rem;font-weight:750;line-height:1.45;}
+
+    .section-head{text-align:center;max-width:860px;margin:0 auto 58px;}
+    .section-head h2{margin-top:18px;font-size:clamp(2.25rem,4vw,4.3rem);line-height:1.01;letter-spacing:-.065em;font-weight:950;}
+    .section-head p{margin-top:18px;color:#c8c8cf;font-size:1.08rem;line-height:1.78;}
+
+    .video-shell{position:relative;overflow:hidden;padding:14px;}
+    .video-shell::before{content:"";position:absolute;inset:-45%;background:conic-gradient(from 180deg,transparent,rgba(255,43,43,.36),transparent,rgba(0,255,136,.20),transparent);animation:spin 9s linear infinite;opacity:.48;}
+    .video-shell iframe{position:relative;z-index:1;width:100%;height:610px;border:0;border-radius:22px;background:#000;display:block;}
+    @keyframes spin{to{transform:rotate(360deg);}}
+
+    .download-card{
+      display:grid;
+      grid-template-columns:1.05fr .95fr;
+      gap:28px;
+      align-items:center;
+      padding:38px;
+      overflow:hidden;
+      position:relative;
+    }
+    .download-card::before{content:"";position:absolute;inset:-2px;background:radial-gradient(circle at 10% 0%,rgba(0,255,136,.18),transparent 34%),radial-gradient(circle at 92% 70%,rgba(255,43,43,.20),transparent 35%);pointer-events:none;}
+    .download-card > *{position:relative;z-index:1;}
+    .download-card h2{font-size:clamp(2.1rem,3.7vw,4rem);line-height:1.02;letter-spacing:-.06em;font-weight:950;}
+    .download-card p{margin-top:16px;color:#d7d7dd;line-height:1.78;font-size:1.05rem;}
+    .download-meta{display:flex;flex-wrap:wrap;gap:12px;margin-top:22px;}
+    .pill{display:inline-flex;align-items:center;gap:8px;padding:10px 13px;border-radius:999px;background:rgba(255,255,255,.06);border:1px solid var(--line);color:#fff;font-weight:850;font-size:.9rem;}
+    .download-box{padding:26px;border-radius:26px;background:rgba(0,0,0,.32);border:1px solid var(--line-strong);}
+    .download-number{font-size:3.2rem;line-height:.95;font-weight:950;color:var(--green);letter-spacing:-.07em;}
+    .download-box p{font-size:.96rem;color:var(--muted);}
+    .download-box .btn{width:100%;margin-top:22px;}
+
+    .split{display:grid;grid-template-columns:.95fr 1.05fr;gap:26px;align-items:stretch;}
+    .panel{padding:34px;overflow:hidden;position:relative;}
+    .panel::after{content:"";position:absolute;width:260px;height:260px;border-radius:50%;right:-120px;bottom:-125px;background:radial-gradient(circle,rgba(255,43,43,.24),transparent 70%);}
+    .panel h3{font-size:1.75rem;letter-spacing:-.04em;margin:16px 0 12px;}
+    .panel p{position:relative;color:var(--muted);line-height:1.78;}
+
+    .feature-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;}
+    .feature-card{position:relative;min-height:240px;padding:26px;overflow:hidden;transition:.4s ease;transform-style:preserve-3d;}
+    .feature-card:hover{transform:translateY(-10px) rotateX(2deg);border-color:rgba(255,43,43,.45);box-shadow:var(--shadow-red);}
+    .feature-card::before{content:"";position:absolute;inset:0;background:radial-gradient(circle at top right,rgba(255,43,43,.18),transparent 36%);opacity:.78;}
+    .feature-card.green::before{background:radial-gradient(circle at top right,rgba(0,255,136,.16),transparent 36%);}
+    .icon{position:relative;width:54px;height:54px;border-radius:18px;display:grid;place-items:center;background:rgba(255,43,43,.12);border:1px solid rgba(255,43,43,.25);font-size:1.45rem;margin-bottom:22px;}
+    .green .icon{background:rgba(0,255,136,.10);border-color:rgba(0,255,136,.22);}
+    .feature-card h3{position:relative;font-size:1.18rem;margin-bottom:10px;letter-spacing:-.02em;}
+    .feature-card p{position:relative;color:var(--muted);line-height:1.74;font-size:.98rem;}
+
+    .timeline{position:relative;max-width:930px;margin:0 auto;}
+    .timeline::before{content:"";position:absolute;top:0;bottom:0;left:50%;width:1px;background:linear-gradient(transparent,rgba(255,43,43,.9),rgba(0,255,136,.82),transparent);}
+    .step{display:grid;grid-template-columns:1fr 1fr;gap:38px;align-items:center;margin:34px 0;}
+    .step:nth-child(even) .step-card{grid-column:2;}
+    .step:nth-child(even) .step-number{grid-column:1;grid-row:1;text-align:right;}
+    .step-card{padding:26px;}
+    .step-card strong{display:inline-block;color:var(--green);margin-bottom:8px;font-weight:950;}
+    .step-card h3{font-size:1.4rem;margin-bottom:10px;letter-spacing:-.03em;}
+    .step-card p{color:var(--muted);line-height:1.75;}
+    .step-number{font-size:clamp(3rem,7vw,6rem);font-weight:950;letter-spacing:-.08em;color:rgba(255,255,255,.075);}
+
+    .results-mosaic{display:grid;grid-template-columns:1.1fr .9fr 1fr;grid-auto-rows:220px;gap:18px;}
+    .result-tile{position:relative;overflow:hidden;border-radius:26px;border:1px solid var(--line);background:#111;box-shadow:0 22px 70px rgba(0,0,0,.36);transition:.45s ease;}
+    .result-tile.big{grid-row:span 2;}
+    .result-tile.wide{grid-column:span 2;}
+    .result-tile img{width:100%;height:100%;object-fit:cover;transition:.55s ease;}
+    .result-tile::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 38%,rgba(0,0,0,.86));}
+    .result-tile:hover{transform:translateY(-10px) scale(1.015);border-color:rgba(255,43,43,.48);box-shadow:var(--shadow-red);}
+    .result-tile:hover img{transform:scale(1.08);}
+    .result-caption{position:absolute;left:18px;right:18px;bottom:18px;z-index:2;}
+    .result-caption strong{display:block;color:#fff;font-size:1rem;}
+    .result-caption span{display:inline-flex;margin-top:6px;color:var(--green);font-weight:950;}
+
+    .offer{position:relative;overflow:hidden;padding:44px;display:grid;grid-template-columns:1fr .92fr;gap:34px;align-items:center;}
+    .offer::before{content:"";position:absolute;inset:-2px;background:radial-gradient(circle at 20% 0%,rgba(255,43,43,.24),transparent 34%),radial-gradient(circle at 92% 70%,rgba(0,255,136,.16),transparent 35%);pointer-events:none;}
+    .offer > *{position:relative;z-index:1;}
+    .offer h2{margin-top:18px;font-size:clamp(2.3rem,4.5vw,4.8rem);line-height:.98;letter-spacing:-.073em;font-weight:950;}
+    .offer p{margin-top:18px;color:#d3d3d9;line-height:1.78;font-size:1.06rem;}
+    .offer-list{display:grid;gap:12px;margin-top:25px;}
+    .offer-item{display:flex;gap:12px;align-items:flex-start;color:#ededf0;font-weight:760;line-height:1.55;}
+    .check{width:24px;height:24px;border-radius:50%;background:rgba(0,255,136,.12);border:1px solid rgba(0,255,136,.30);display:grid;place-items:center;color:var(--green);flex:0 0 auto;font-weight:950;}
+    .price-card{padding:28px;border-radius:28px;background:rgba(0,0,0,.38);border:1px solid var(--line-strong);box-shadow:0 30px 90px rgba(0,0,0,.36);}
+    .price-card .label{color:var(--muted);font-size:.78rem;font-weight:950;text-transform:uppercase;letter-spacing:.12em;}
+    .price-card h3{margin-top:10px;font-size:2rem;letter-spacing:-.04em;}
+    .price-card .btn{width:100%;margin-top:22px;}
+    .scarcity{margin-top:14px;color:var(--green);font-weight:950;text-align:center;font-size:.92rem;}
+
+    .compare-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;}
+    .compare-card{padding:30px;}
+    .compare-card h3{font-size:1.5rem;margin-bottom:18px;letter-spacing:-.04em;}
+    .compare-list{display:grid;gap:12px;}
+    .compare-list li{list-style:none;display:flex;gap:10px;color:var(--muted);line-height:1.55;}
+    .bad{color:#ff7777;font-weight:950;}
+    .good{color:var(--green);font-weight:950;}
+
+    .reviews-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;}
+    .review-card{padding:26px;transition:.35s ease;}
+    .review-card:hover{transform:translateY(-8px);border-color:rgba(0,255,136,.36);box-shadow:var(--shadow-green);}
+    .stars{color:#ffd76a;letter-spacing:2px;margin-bottom:14px;}
+    .review-card p{color:#d5d5da;line-height:1.75;}
+    .review-author{display:flex;align-items:center;gap:12px;margin-top:18px;color:#fff;font-weight:950;}
+    .review-avatar{width:38px;height:38px;border-radius:50%;display:grid;place-items:center;background:linear-gradient(135deg,var(--red),#330000);}
+
+    .faq{max-width:920px;margin:0 auto;display:grid;gap:14px;}
+    .faq-item{overflow:hidden;transition:.3s;}
+    .faq-question{width:100%;padding:22px 24px;background:transparent;border:0;color:#fff;display:flex;align-items:center;justify-content:space-between;gap:18px;text-align:left;font-size:1rem;font-weight:950;cursor:pointer;}
+    .faq-question span{width:32px;height:32px;border-radius:50%;display:grid;place-items:center;background:rgba(255,255,255,.06);color:var(--green);transition:.3s;flex:0 0 auto;}
+    .faq-answer{max-height:0;overflow:hidden;padding:0 24px;color:var(--muted);line-height:1.75;transition:.35s ease;}
+    .faq-item.active{border-color:rgba(255,43,43,.36);}
+    .faq-item.active .faq-answer{max-height:210px;padding:0 24px 24px;}
+    .faq-item.active .faq-question span{transform:rotate(45deg);background:rgba(255,43,43,.13);color:var(--red);}
+
+    .final-cta{text-align:center;padding:72px 28px;overflow:hidden;position:relative;}
+    .final-cta::before{content:"";position:absolute;inset:-2px;background:radial-gradient(circle at 50% 0%,rgba(255,43,43,.20),transparent 36%),radial-gradient(circle at 50% 100%,rgba(0,255,136,.12),transparent 34%);}
+    .final-cta > *{position:relative;z-index:1;}
+    .final-cta h2{margin-top:18px;font-size:clamp(2.35rem,5vw,5rem);line-height:.98;letter-spacing:-.073em;font-weight:950;}
+    .final-cta p{max-width:760px;margin:20px auto 0;color:#d6d6db;font-size:1.08rem;line-height:1.78;}
+    .final-cta .btn{margin-top:30px;}
+
+    footer{padding:72px 0 118px;border-top:1px solid var(--line);color:var(--muted);}
+    .footer-grid{display:flex;justify-content:space-between;gap:24px;align-items:flex-start;flex-wrap:wrap;}
+    .footer-logo{color:#fff;font-weight:950;letter-spacing:.12em;text-transform:uppercase;margin-bottom:10px;}
+    .footer-links{display:flex;gap:18px;flex-wrap:wrap;}
+    .footer-links a{text-decoration:none;color:var(--muted);font-weight:760;}
+    .footer-links a:hover{color:#fff;}
+
+    .floating-whatsapp{position:fixed;right:24px;bottom:24px;z-index:101;display:flex;align-items:center;gap:12px;padding:14px 18px;border-radius:999px;background:linear-gradient(135deg,var(--green),#00d977);color:#021009;text-decoration:none;font-weight:950;box-shadow:0 18px 65px rgba(0,255,136,.36);animation:pulse 2.2s infinite;}
+    .floating-whatsapp .bubble{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;background:rgba(0,0,0,.12);font-size:1.18rem;}
+    @keyframes pulse{0%,100%{transform:scale(1);}50%{transform:scale(1.045);}}
+
+    .reveal{opacity:0;transform:translateY(38px);transition:opacity .82s ease,transform .82s ease;}
+    .reveal.visible{opacity:1;transform:translateY(0);}
+    .magnetic{transition:transform .18s ease;}
+
+    @media(max-width:1020px){
+      .nav-links{display:none;}
+      .hero-grid,.split,.offer,.download-card{grid-template-columns:1fr;}
+      .hero{padding-top:155px;}
+      .hero-visual{min-height:600px;}
+      .phone-stage{right:50%;transform:translateX(50%);}
+      .stats-bar{grid-template-columns:repeat(2,1fr);}
+      .feature-grid,.reviews-grid{grid-template-columns:1fr 1fr;}
+      .timeline::before{left:18px;}
+      .step,.step:nth-child(even){grid-template-columns:1fr;gap:12px;padding-left:48px;}
+      .step:nth-child(even) .step-card,.step:nth-child(even) .step-number{grid-column:auto;grid-row:auto;text-align:left;}
+      .step-number{font-size:3.4rem;}
+      .results-mosaic{grid-template-columns:1fr 1fr;grid-auto-rows:225px;}
+    }
+
+    @media(max-width:720px){
+      .top-banner{height:44px;font-size:.76rem;line-height:1.25;}
+      .nav{top:58px;border-radius:24px;}
+      .brand span{display:none;}
+      .nav .btn{font-size:.78rem;padding:10px 12px;}
+      .container{width:min(100% - 28px,var(--max));}
+      section{padding:76px 0;}
+      .hero{padding-top:150px;}
+      .hero h1{font-size:3.12rem;}
+      .hero-actions{flex-direction:column;align-items:stretch;}
+      .btn{width:100%;}
+      .trust-row{align-items:flex-start;}
+      .hero-visual{min-height:525px;}
+      .phone-stage{width:330px;height:472px;}
+      .phone-card{width:185px;height:390px;border-radius:30px;}
+      .phone-card.one{right:82px;}
+      .phone-card.two{right:0;top:72px;}
+      .phone-card.three{right:155px;top:118px;}
+      .ticket-top{right:0;top:8px;}
+      .ticket-mid{display:none;}
+      .ticket-bottom{left:0;bottom:28px;}
+      .stats-bar,.feature-grid,.reviews-grid,.results-mosaic,.compare-grid{grid-template-columns:1fr;}
+      .result-tile,.result-tile.big,.result-tile.wide{grid-row:auto;grid-column:auto;height:330px;}
+      .video-shell iframe{height:260px;}
+      .download-card,.panel,.offer,.final-cta,.compare-card{padding:26px;}
+      .download-number{font-size:2.7rem;}
+      .floating-whatsapp{left:14px;right:14px;bottom:14px;justify-content:center;}
+      footer{padding-bottom:126px;}
+    }
+
+    @media(max-width:390px){
+      .hero h1{font-size:2.72rem;}
+      .section-head h2{font-size:2.05rem;}
+      .phone-stage{width:300px;}
+      .phone-card{width:170px;height:360px;}
+      .phone-card.one{right:72px;}
+      .phone-card.three{right:136px;}
+      .download-meta{display:grid;}
+    }
+  </style>
 </head>
 
 <body>
-
-<div class="container">
-
-<h1>ZONE D’OMBRE</h1>
-
-<h2>La formation 100% anonyme pour te lancer dans l'achat-revente maîtrisé</h2>
-
-<p class="center"><strong>→ De 2 000€ à 20 000€ / mois, en partant de rien.</strong></p>
-
-<div class="section center">
-
-<div class="stats">
-
-<div class="stat">
-<h3 class="counter" data-target="71" data-suffix="">0</h3>
-<p>Élèves formés</p>
-</div>
-
-<div class="stat">
-<h3 class="counter" data-target="180000" data-suffix="€">0€</h3>
-<p>Chiffre d'affaires généré</p>
-</div>
-
-<div class="stat">
-<h3 class="counter" data-target="3" data-suffix=" ans">0 ans</h3>
-<p>D'expertise</p>
-</div>
-
-<div class="stat">
-<h3 class="counter" data-target="4.9" data-suffix="" data-decimals="1">0</h3>
-<p>Note moyenne</p>
-</div>
-
-</div>
-
-</div>
-
-<div class="section">
-
-<iframe src="https://player.vimeo.com/video/1076911087?autoplay=1&title=0&byline=0&portrait=0" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
-
-</div>
-
-<div class="section center">
-
-<h2>🎁 Guide offert – Achat Revente 2026</h2>
-
-<p style="max-width:650px;margin:auto;">
-Récupère gratuitement le guide <strong>“Pourquoi commencer l'achat revente en 2026”</strong>
-pour comprendre le potentiel de ce business et passer à l’action plus vite.
-</p>
-
-<p style="margin-top:10px;color:#00ff88;font-weight:600;">
-Téléchargement immédiat 👇
-</p>
-
-<br>
-
-<a href="guide-achat-revente-2026.pdf" download class="button">
-📥 Télécharger le guide gratuit
-</a>
-
-<p style="margin-top:15px;font-size:0.9em;color:#888;">
-PDF offert — accès instantané
-</p>
-
-</div>
-
-<div class="section">
-
-<h2>🚨 Ce que tu vas apprendre :</h2>
-
-<div class="feature-grid">
-
-<div class="feature-card">
-<strong>Les bases solides</strong>
-Comprendre le système, identifier les sources et sécuriser tes moves.
-</div>
-
-<div class="feature-card">
-<strong>Techniques professionnelles</strong>
-Développer ton activité comme un vrai pro.
-</div>
-
-<div class="feature-card">
-<strong>Produits gagnants</strong>
-Trouver rapidement ce qui se vend vraiment.
-</div>
-
-<div class="feature-card">
-<strong>Optimisation des ventes</strong>
-Améliorer tes résultats pour atteindre les 5 chiffres mensuels.
-</div>
-
-<div class="feature-card last-center">
-<strong>Plan complet</strong>
-Passer de 0 à 2K puis à 20K/mois étape par étape.
-</div>
-
-</div>
-
-</div>
-
-<div class="section">
-
-<h2>🎁 Inclus dans la formation :</h2>
-
-<div class="feature-grid">
-
-<div class="feature-card">
-<strong>Accès à vie</strong>
-Tous les modules restent disponibles sans limite.
-</div>
-
-<div class="feature-card">
-<strong>Groupe privé d’entraide</strong>
-Échange direct avec les membres et soutien au quotidien.
-</div>
-
-<div class="feature-card">
-<strong>Mises à jour gratuites à vie</strong>
-Le contenu évolue avec les nouvelles opportunités.
-</div>
-
-<div class="feature-card">
-<strong>Stratégies + outils bonus</strong>
-Des méthodes confidentielles pour aller plus vite.
-</div>
-
-<div class="feature-card">
-<strong>Packs de factures</strong>
-Accès aux plus grandes marques pour t’accompagner.
-</div>
-
-<div class="feature-card">
-<strong>Accompagnement</strong>
-Un suivi plus humain pour t’aider à avancer plus vite et éviter les erreurs.
-</div>
-
-</div>
-
-</div>
-
-<div class="section center">
-
-<h2>👤 Qui suis-je ?</h2>
-
-<p style="max-width:650px;margin:auto;">
-Je m'appelle <strong>Arno</strong>, je suis dans l'<strong>achat-revente depuis plus de 3 ans</strong>.
-J’ai commencé <strong>de zéro</strong>, sans expérience ni connaissances.
-</p>
-
-<p style="max-width:650px;margin:auto;margin-top:15px;">
-Aujourd’hui, j’ai généré <strong>plusieurs milliers d’euros</strong> grâce à ce système.
-</p>
-
-<p style="max-width:650px;margin:auto;margin-top:15px;">
-Zone d’Ombre n’est pas juste une formation, c’est un <strong>accompagnement complet</strong> que j’ai créé pour aider ceux qui veulent <strong>faire de l’argent comme moi</strong>.
-</p>
-
-</div>
-
-<div class="section center">
-
-<p>Toutes les candidatures ne sont pas acceptées.</p>
-
-<p>On sélectionne uniquement les profils sérieux et prêts à passer à l’action.</p>
-
-<p style="margin-top:16px;color:#00ff88;font-weight:700;">
-👉 Contacte-moi directement sur WhatsApp.
-</p>
-
-<br>
-
-<a href="https://wa.me/33786705803" target="_blank" rel="noopener noreferrer" class="button">
-💬 Contacte-moi sur WhatsApp
-</a>
-
-</div>
-
-<div class="section">
-
-<h2>📸 Résultats</h2>
-
-<p class="center" style="color:#00ff88;font-weight:600;">
-Résultats réels obtenus avec la méthode 👇
-</p>
-
-<div class="results-stack">
-
-<div class="result-card" style="--r:-6;">
-<img src="https://res.cloudinary.com/dt8crx1kl/image/upload/v1775259239/Screenshot_20241207_185537_Vinted_zew5vd.jpg" alt="Résultat 1" loading="lazy">
-</div>
-
-<div class="result-card" style="--r:4;">
-<img src="https://res.cloudinary.com/dt8crx1kl/image/upload/v1775259238/IMG_4738_upxqim.png" alt="Résultat 2" loading="lazy">
-</div>
-
-<div class="result-card" style="--r:-3;">
-<img src="https://res.cloudinary.com/dt8crx1kl/image/upload/v1775259238/IMG_0577_mdolru.png" alt="Résultat 3" loading="lazy">
-</div>
-
-<div class="result-card" style="--r:-4; z-index:2;">
-<img src="https://res.cloudinary.com/dt8crx1kl/image/upload/v1775259238/IMG_0257f_cjf9l3.png" alt="Résultat 4" loading="lazy">
-</div>
-
-<div class="result-card" style="--r:3;">
-<img src="https://res.cloudinary.com/dt8crx1kl/image/upload/v1775259238/IMG_20250724_211223_tbzga2.jpg" alt="Résultat 5" loading="lazy">
-</div>
-
-</div>
-
-</div>
-
-<div class="section center">
-
-<h2>💬 Rejoins la communauté</h2>
-
-<p style="max-width:650px;margin:auto;">
-Rejoins la communauté privée pour échanger avec les membres et rester connecté aux dernières opportunités.
-</p>
-
-<br>
-
-<div class="community-grid">
-
-<div class="social-card">
-<a href="https://discord.gg/PsSND9uyCr" target="_blank" rel="noopener noreferrer" class="button">
-Discord
-</a>
-<p>Accède au groupe privé et échange directement avec les membres.</p>
-</div>
-
-</div>
-
-</div>
-
-<div class="section">
-
-<h2>⭐ Avis des membres</h2>
-
-<div class="reviews">
-
-<div class="review">
-<div class="stars">★★★★★</div>
-<p>Franchement surpris. J’ai appliqué les méthodes et j’ai réussi à générer environ 800€ dès mon premier mois. Les explications sont claires et le groupe aide beaucoup.</p>
-<div class="review-name">— Kevin M.</div>
-</div>
-
-<div class="review">
-<div class="stars">★★★★★</div>
-<p>Formation très propre. Tout est expliqué étape par étape. Meme en partant de zéro j’ai compris comment trouver les bon produits assez vite.</p>
-<div class="review-name">— Lucas D.</div>
-</div>
-
-<div class="review">
-<div class="stars">★★★★★</div>
-<p>Le groupe privé vaut déjà le prix de la formation. On peut poser des questions et il y a toujours quelqu’un pour répondre.</p>
-<div class="review-name">— Mehdi R.</div>
-</div>
-
-<div class="review">
-<div class="stars">★★★★★</div>
-<p>Franchement je pensais pas que ca marcherai mais les methode sont simple et sa aide vraiment a se lancer.</p>
-<div class="review-name">— Sarah L.</div>
-</div>
-
-</div>
-
-<div class="social-card">
-<a href="https://instagram.com/arno.dwe" target="_blank" rel="noopener noreferrer" class="button">
-Instagram
-</a>
-<p>Retrouve-moi aussi sur Instagram pour suivre l’actualité et garder le contact plus facilement.</p>
-</div>
-
-</div>
-
-<div class="section">
-
-<h2>❓ Questions fréquentes</h2>
-
-<div class="reviews">
-
-<div class="review">
-<p><strong>Est-ce que la formation est adaptée aux débutants ?</strong></p>
-<p>Oui, la formation est conçue pour être accessible à tous, même si tu pars de zéro, sans expérience ni connaissances en achat-revente.</p>
-</div>
-
-<div class="review">
-<p><strong>En combien de temps peut-on obtenir ses premiers résultats ?</strong></p>
-<p>Les premiers résultats peuvent arriver rapidement. Certains atteignent déjà environ 1000€ en 30 jours, mais tout dépend de ton implication et de ta régularité.</p>
-</div>
-
-<div class="review">
-<p><strong>Est-ce que ça demande beaucoup de temps ?</strong></p>
-<p>Non, 30 minutes par jour peuvent suffire pour commencer et obtenir des résultats. L’important est d’être régulier.</p>
-</div>
-
-<div class="review">
-<p><strong>Faut-il de l’argent pour commencer ?</strong></p>
-<p>Un petit investissement peut être nécessaire pour démarrer, mais il reste accessible et adapté même si tu débutes avec peu de moyens.</p>
-</div>
-
-</div>
-
-</div>
-
-<div class="section center">
-
-<h2>📩 Une question ?</h2>
-
-<p>Contacte-moi : eman2kv@gmail.com</p>
-
-</div>
-
-<div class="footer">
-© <span id="year"></span> Zone d’Ombre – Tous droits réservés
-</div>
-
-</div>
-
-<script>
-document.getElementById("year").textContent = new Date().getFullYear();
-
-const counters = document.querySelectorAll(".counter");
-
-function formatNumber(value, suffix = "", decimals = 0) {
-const fixed = Number(value).toFixed(decimals);
-let parts = fixed.split(".");
-parts[0] = Number(parts[0]).toLocaleString("fr-FR");
-return parts.join(decimals > 0 ? "." : "") + suffix;
-}
-
-function animateCounter(counter) {
-const target = parseFloat(counter.dataset.target);
-const suffix = counter.dataset.suffix || "";
-const decimals = parseInt(counter.dataset.decimals || "0", 10);
-const parent = counter.closest(".stat");
-
-let startTimestamp = null;
-const duration = 1800;
-
-function update(timestamp) {
-if (!startTimestamp) startTimestamp = timestamp;
-const progress = Math.min((timestamp - startTimestamp) / duration, 1);
-const easeOut = 1 - Math.pow(1 - progress, 3);
-const current = target * easeOut;
-
-counter.textContent = formatNumber(current, suffix, decimals);
-
-if (parent) {
-parent.classList.add("animate");
-}
-
-if (progress < 1) {
-requestAnimationFrame(update);
-} else {
-counter.textContent = formatNumber(target, suffix, decimals);
-setTimeout(() => {
-if (parent) parent.classList.remove("animate");
-}, 300);
-}
-}
-
-requestAnimationFrame(update);
-}
-
-const observer = new IntersectionObserver((entries, obs) => {
-entries.forEach(entry => {
-if (entry.isIntersecting) {
-animateCounter(entry.target);
-obs.unobserve(entry.target);
-}
-});
-}, { threshold: 0.6 });
-
-counters.forEach(counter => observer.observe(counter));
-</script>
-
+  <div class="progress" id="progress"></div>
+
+  <div class="top-banner">
+    🎁 PDF gratuit disponible — déjà 889 téléchargements — accès immédiat
+  </div>
+
+  <nav class="nav">
+    <a href="#top" class="brand">
+      <div class="brand-mark">Z</div>
+      <span>Zone d'Ombre</span>
+    </a>
+    <div class="nav-links">
+      <a href="#guide">Guide gratuit</a>
+      <a href="#methode">Méthode</a>
+      <a href="#resultats">Résultats</a>
+      <a href="#faq">FAQ</a>
+    </div>
+    <a href="https://wa.me/33786705803?text=Salut%20Arno%2C%20je%20veux%20en%20savoir%20plus%20sur%20Zone%20d%27Ombre" target="_blank" rel="noopener noreferrer" class="btn btn-primary magnetic">WhatsApp</a>
+  </nav>
+
+  <main id="top">
+    <section class="hero">
+      <div class="container">
+        <div class="hero-grid">
+          <div class="hero-copy reveal">
+            <div class="eyebrow"><span class="dot"></span> Accompagnement privé — Vinted Luxe</div>
+            <h1>
+              L'achat-revente luxe
+              <span class="serif gradient-text">sans avancer dans le flou.</span>
+            </h1>
+            <p class="hero-lead">
+              Zone d'Ombre t'aide à apprendre comment repérer des pièces de luxe sous-cotées sur Vinted, analyser leur potentiel, négocier proprement et revendre avec une méthode claire.
+            </p>
+            <div class="hero-actions">
+              <a href="https://wa.me/33786705803?text=Salut%20Arno%2C%20je%20veux%20candidater%20pour%20Zone%20d%27Ombre" target="_blank" rel="noopener noreferrer" class="btn btn-primary magnetic">💬 Candidater sur WhatsApp</a>
+              <a href="#guide" class="btn btn-green magnetic">📥 Télécharger le PDF gratuit</a>
+            </div>
+            <div class="trust-row">
+              <div class="avatars"><div class="avatar">A</div><div class="avatar">K</div><div class="avatar">M</div><div class="avatar">+</div></div>
+              <span>889 téléchargements du guide — accompagnement sélectif — réponse directe sur WhatsApp</span>
+            </div>
+          </div>
+
+          <div class="hero-visual reveal">
+            <div class="orb"></div>
+            <div class="floating-ticket ticket-top"><div class="ticket-label">Téléchargements</div><div class="ticket-value">889</div></div>
+            <div class="floating-ticket ticket-mid"><div class="ticket-label">Canal</div><div class="ticket-value red">Vinted Luxe</div></div>
+            <div class="phone-stage" id="phoneStage">
+              <div class="phone-card one"><img src="https://res.cloudinary.com/dt8crx1kl/image/upload/v1775259239/Screenshot_20241207_185537_Vinted_zew5vd.jpg" alt="Résultat Vinted Zone d'Ombre"></div>
+              <div class="phone-card two"><img src="https://res.cloudinary.com/dt8crx1kl/image/upload/v1775259238/IMG_4738_upxqim.png" alt="Capture vente Vinted luxe"></div>
+              <div class="phone-card three"><img src="https://res.cloudinary.com/dt8crx1kl/image/upload/v1775259238/IMG_0577_mdolru.png" alt="Capture résultat achat revente"></div>
+            </div>
+            <div class="floating-ticket ticket-bottom"><div class="ticket-label">Objectif</div><div class="ticket-value">Marge nette</div></div>
+          </div>
+        </div>
+
+        <div class="stats-bar reveal">
+          <div class="stat glass tilt"><h3><span class="counter" data-target="71" data-suffix="+">0</span></h3><p>Personnes formées / accompagnées</p></div>
+          <div class="stat glass tilt"><h3><span class="counter" data-target="889" data-suffix="">0</span></h3><p>Téléchargements du PDF gratuit</p></div>
+          <div class="stat glass tilt"><h3><span class="counter" data-target="3" data-suffix=" ans">0</span></h3><p>D'expérience terrain</p></div>
+          <div class="stat glass tilt"><h3><span class="counter" data-target="4.9" data-suffix="/5" data-decimals="1">0</span></h3><p>Note moyenne</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="guide">
+      <div class="container">
+        <div class="download-card glass reveal">
+          <div>
+            <div class="eyebrow"><span class="dot"></span> Guide PDF gratuit</div>
+            <h2>Le point de départ pour comprendre Vinted Luxe.</h2>
+            <p>
+              Télécharge gratuitement le guide “Pourquoi commencer l'achat-revente Vinted Luxe en 2026” et découvre les bases : catégories intéressantes, erreurs à éviter, logique de marge, sourcing et revente.
+            </p>
+            <div class="download-meta">
+              <span class="pill">📥 PDF gratuit</span>
+              <span class="pill">⚡ Accès immédiat</span>
+              <span class="pill">✅ 889 téléchargements</span>
+            </div>
+          </div>
+          <div class="download-box">
+            <div class="download-number"><span class="counter" data-target="889" data-suffix="">0</span></div>
+            <p>personnes ont déjà téléchargé le guide gratuit.</p>
+            <a href="guide-achat-revente-2026.pdf" download class="btn btn-green magnetic">📥 Télécharger le guide gratuit</a>
+            <p style="font-size:.86rem;text-align:center;margin-top:12px;">PDF gratuit — pas de paiement — accès instantané.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="methode">
+      <div class="container">
+        <div class="section-head reveal">
+          <div class="eyebrow"><span class="dot red-dot"></span> Vidéo de présentation</div>
+          <h2>Regarde comment fonctionne l'accompagnement.</h2>
+          <p>Une page doit emmener le visiteur vers une action simple : comprendre le potentiel, télécharger le guide, puis te contacter sur WhatsApp.</p>
+        </div>
+        <div class="video-shell glass reveal">
+          <iframe src="https://player.vimeo.com/video/1076911087?title=0&byline=0&portrait=0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="container">
+        <div class="split">
+          <div class="panel glass reveal">
+            <div class="eyebrow"><span class="dot"></span> Le vrai problème</div>
+            <h3>La plupart des débutants achètent au hasard.</h3>
+            <p>
+              Ils voient une marque connue, pensent que c'est une bonne affaire, achètent trop vite, puis restent bloqués avec une pièce difficile à revendre. Zone d'Ombre est là pour structurer ta façon de chercher, analyser et décider.
+            </p>
+          </div>
+          <div class="feature-grid">
+            <div class="feature-card glass green reveal"><div class="icon">💎</div><h3>Pièces de luxe</h3><p>Repérer les marques, catégories et modèles qui ont une vraie demande.</p></div>
+            <div class="feature-card glass reveal"><div class="icon">🔎</div><h3>Analyse d'annonce</h3><p>Lire une annonce rapidement : prix, état, potentiel, risque et marge.</p></div>
+            <div class="feature-card glass green reveal"><div class="icon">🛡️</div><h3>Réduction des risques</h3><p>Adopter les bons réflexes pour éviter les erreurs coûteuses.</p></div>
+            <div class="feature-card glass reveal"><div class="icon">💬</div><h3>Négociation</h3><p>Contacter les vendeurs avec une approche simple, propre et efficace.</p></div>
+            <div class="feature-card glass green reveal"><div class="icon">📸</div><h3>Annonce optimisée</h3><p>Photos, titre, description, prix : chaque détail aide à vendre.</p></div>
+            <div class="feature-card glass reveal"><div class="icon">🚀</div><h3>Plan d'action</h3><p>Une routine claire à suivre au lieu d'avancer à l'instinct.</p></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="container">
+        <div class="section-head reveal">
+          <div class="eyebrow"><span class="dot"></span> Parcours</div>
+          <h2>Un système étape par étape.</h2>
+          <p>Le but : t'aider à comprendre quoi faire, dans quel ordre, et pourquoi.</p>
+        </div>
+        <div class="timeline">
+          <div class="step reveal"><div class="step-card glass"><strong>Étape 01</strong><h3>Comprendre le marché</h3><p>Prix, demande, marques, saisonnalité, état des pièces et psychologie des acheteurs.</p></div><div class="step-number">01</div></div>
+          <div class="step reveal"><div class="step-card glass"><strong>Étape 02</strong><h3>Sourcer les annonces</h3><p>Mettre en place une routine de recherche pour trouver des opportunités avant les autres.</p></div><div class="step-number">02</div></div>
+          <div class="step reveal"><div class="step-card glass"><strong>Étape 03</strong><h3>Calculer la marge</h3><p>Prix d'achat, frais, temps de revente, marge attendue : tu apprends à décider froidement.</p></div><div class="step-number">03</div></div>
+          <div class="step reveal"><div class="step-card glass"><strong>Étape 04</strong><h3>Revendre proprement</h3><p>Optimiser ton annonce, ton prix, ta présentation et ton suivi pour vendre plus vite.</p></div><div class="step-number">04</div></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="resultats">
+      <div class="container">
+        <div class="section-head reveal">
+          <div class="eyebrow"><span class="dot"></span> Résultats</div>
+          <h2>Une page qui montre, pas seulement qui promet.</h2>
+          <p>Garde cette galerie et remplace progressivement par tes meilleures preuves : captures Vinted, messages, marges, ventes, avis.</p>
+        </div>
+        <div class="results-mosaic reveal">
+          <div class="result-tile big"><img src="https://res.cloudinary.com/dt8crx1kl/image/upload/v1775259239/Screenshot_20241207_185537_Vinted_zew5vd.jpg" alt="Résultat Vinted"><div class="result-caption"><strong>Opération Vinted</strong><span>Analyse + revente</span></div></div>
+          <div class="result-tile"><img src="https://res.cloudinary.com/dt8crx1kl/image/upload/v1775259238/IMG_4738_upxqim.png" alt="Capture résultat"><div class="result-caption"><strong>Pièce sous-cotée</strong><span>Potentiel de marge</span></div></div>
+          <div class="result-tile"><img src="https://res.cloudinary.com/dt8crx1kl/image/upload/v1775259238/IMG_0577_mdolru.png" alt="Capture vente"><div class="result-caption"><strong>Annonce optimisée</strong><span>Revente plus propre</span></div></div>
+          <div class="result-tile wide"><img src="https://res.cloudinary.com/dt8crx1kl/image/upload/v1775259238/IMG_0257f_cjf9l3.png" alt="Capture résultat"><div class="result-caption"><strong>Méthode Zone d'Ombre</strong><span>Vinted Luxe</span></div></div>
+          <div class="result-tile"><img src="https://res.cloudinary.com/dt8crx1kl/image/upload/v1775259238/IMG_20250724_211223_tbzga2.jpg" alt="Capture Vinted"><div class="result-caption"><strong>Suivi terrain</strong><span>Accompagnement</span></div></div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="container">
+        <div class="section-head reveal">
+          <div class="eyebrow"><span class="dot red-dot"></span> Avant / Après</div>
+          <h2>Pourquoi l'accompagnement change tout.</h2>
+        </div>
+        <div class="compare-grid">
+          <div class="compare-card glass reveal">
+            <h3>Sans méthode</h3>
+            <ul class="compare-list">
+              <li><span class="bad">✕</span><span>Tu achètes parce que “ça semble pas cher”.</span></li>
+              <li><span class="bad">✕</span><span>Tu ne sais pas vraiment combien tu peux revendre.</span></li>
+              <li><span class="bad">✕</span><span>Tu perds du temps sur des annonces faibles.</span></li>
+              <li><span class="bad">✕</span><span>Tu prends des risques inutiles sur certaines pièces.</span></li>
+            </ul>
+          </div>
+          <div class="compare-card glass reveal">
+            <h3>Avec Zone d'Ombre</h3>
+            <ul class="compare-list">
+              <li><span class="good">✓</span><span>Tu sais quoi analyser avant d'acheter.</span></li>
+              <li><span class="good">✓</span><span>Tu calcules ta marge et ton prix de sortie.</span></li>
+              <li><span class="good">✓</span><span>Tu suis une routine de sourcing structurée.</span></li>
+              <li><span class="good">✓</span><span>Tu peux poser tes questions directement.</span></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="accompagnement">
+      <div class="container">
+        <div class="offer glass reveal">
+          <div>
+            <div class="eyebrow"><span class="dot"></span> Accompagnement privé</div>
+            <h2>On ne cherche pas des curieux. On cherche des profils sérieux.</h2>
+            <p>
+              Zone d'Ombre est pensé pour les personnes qui veulent apprendre proprement l'achat-revente de luxe sur Vinted, avec une méthode et un vrai échange humain.
+            </p>
+            <div class="offer-list">
+              <div class="offer-item"><span class="check">✓</span><span>Plan d'action clair pour démarrer sans te disperser.</span></div>
+              <div class="offer-item"><span class="check">✓</span><span>Support et échange direct via WhatsApp.</span></div>
+              <div class="offer-item"><span class="check">✓</span><span>Analyse des annonces, marges et opportunités.</span></div>
+              <div class="offer-item"><span class="check">✓</span><span>Conseils sur sourcing, vérification, prix et revente.</span></div>
+              <div class="offer-item"><span class="check">✓</span><span>Accès au guide PDF gratuit et aux ressources de base.</span></div>
+            </div>
+          </div>
+          <div class="price-card">
+            <div class="label">Candidature</div>
+            <h3>Accès sur échange WhatsApp</h3>
+            <p>Tu m'envoies un message, je regarde ton niveau, ton objectif et ton sérieux. Si c'est cohérent, on voit comment t'accompagner.</p>
+            <a href="https://wa.me/33786705803?text=Salut%20Arno%2C%20je%20veux%20savoir%20si%20je%20peux%20rejoindre%20Zone%20d%27Ombre" target="_blank" rel="noopener noreferrer" class="btn btn-primary magnetic">💬 Demander l'accès</a>
+            <div class="scarcity">Réponse directe sur WhatsApp</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="container">
+        <div class="section-head reveal">
+          <div class="eyebrow"><span class="dot"></span> Avis</div>
+          <h2>Des retours simples, utiles et crédibles.</h2>
+        </div>
+        <div class="reviews-grid">
+          <div class="review-card glass reveal"><div class="stars">★★★★★</div><p>“J'ai compris comment analyser une annonce au lieu d'acheter juste parce que la marque semblait connue.”</p><div class="review-author"><span class="review-avatar">K</span>Kevin M.</div></div>
+          <div class="review-card glass reveal"><div class="stars">★★★★★</div><p>“Le suivi WhatsApp aide énormément. Tu peux poser tes questions avant de faire une erreur.”</p><div class="review-author"><span class="review-avatar">L</span>Lucas D.</div></div>
+          <div class="review-card glass reveal"><div class="stars">★★★★★</div><p>“La méthode est claire, surtout pour comprendre les marges, les marques et les annonces intéressantes.”</p><div class="review-author"><span class="review-avatar">M</span>Mehdi R.</div></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="faq">
+      <div class="container">
+        <div class="section-head reveal">
+          <div class="eyebrow"><span class="dot"></span> FAQ</div>
+          <h2>Questions fréquentes.</h2>
+        </div>
+        <div class="faq">
+          <div class="faq-item glass reveal"><button class="faq-question">Est-ce adapté aux débutants ? <span>+</span></button><div class="faq-answer">Oui. L'accompagnement est pensé pour partir de zéro, avec une méthode étape par étape.</div></div>
+          <div class="faq-item glass reveal"><button class="faq-question">Faut-il beaucoup d'argent pour commencer ? <span>+</span></button><div class="faq-answer">Non, mais il faut un budget de départ raisonnable. Le but est de faire tourner ton capital progressivement sans prendre de risques inutiles.</div></div>
+          <div class="faq-item glass reveal"><button class="faq-question">Le PDF est-il vraiment gratuit ? <span>+</span></button><div class="faq-answer">Oui. Le guide PDF est gratuit et accessible immédiatement via le bouton de téléchargement.</div></div>
+          <div class="faq-item glass reveal"><button class="faq-question">Est-ce que les résultats sont garantis ? <span>+</span></button><div class="faq-answer">Non. Les résultats dépendent de ton implication, de ton budget, de ta régularité et de ton exécution. L'accompagnement aide à prendre de meilleures décisions.</div></div>
+          <div class="faq-item glass reveal"><button class="faq-question">Comment se passe l'accès ? <span>+</span></button><div class="faq-answer">Tu me contactes sur WhatsApp. On échange sur ta situation, ton objectif et ton sérieux avant de voir si l'accompagnement est adapté.</div></div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="container">
+        <div class="final-cta glass reveal">
+          <div class="eyebrow"><span class="dot"></span> Zone d'Ombre</div>
+          <h2>Télécharge le guide ou contacte-moi directement.</h2>
+          <p>
+            Si tu veux comprendre l'achat-revente Vinted Luxe avant de te lancer, commence par le PDF gratuit. Si tu veux aller plus vite, écris-moi directement sur WhatsApp.
+          </p>
+          <div class="hero-actions" style="justify-content:center;">
+            <a href="guide-achat-revente-2026.pdf" download class="btn btn-green magnetic">📥 Télécharger le PDF gratuit</a>
+            <a href="https://wa.me/33786705803?text=Salut%20Arno%2C%20je%20veux%20rejoindre%20Zone%20d%27Ombre" target="_blank" rel="noopener noreferrer" class="btn btn-primary magnetic">💬 Écrire sur WhatsApp</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-grid">
+      <div>
+        <div class="footer-logo">Zone d'Ombre</div>
+        <p>Accompagnement Vinted Luxe — achat-revente structuré.</p>
+      </div>
+      <div class="footer-links">
+        <a href="https://wa.me/33786705803" target="_blank" rel="noopener noreferrer">WhatsApp</a>
+        <a href="https://instagram.com/arno.dwe" target="_blank" rel="noopener noreferrer">Instagram</a>
+        <a href="#guide">Guide gratuit</a>
+        <a href="#faq">FAQ</a>
+      </div>
+      <p>© <span id="year"></span> Zone d'Ombre. Tous droits réservés.</p>
+    </div>
+  </footer>
+
+  <a href="https://wa.me/33786705803?text=Salut%20Arno%2C%20je%20veux%20en%20savoir%20plus%20sur%20Zone%20d%27Ombre" target="_blank" rel="noopener noreferrer" class="floating-whatsapp" aria-label="Contacter Zone d'Ombre sur WhatsApp">
+    <span class="bubble">💬</span>
+    <span>WhatsApp</span>
+  </a>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    const progress = document.getElementById('progress');
+    window.addEventListener('scroll', () => {
+      const scrollTop = window.scrollY;
+      const height = document.documentElement.scrollHeight - window.innerHeight;
+      progress.style.width = `${(scrollTop / height) * 100}%`;
+    });
+
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if(entry.isIntersecting){
+          entry.target.classList.add('visible');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.13 });
+
+    document.querySelectorAll('.reveal').forEach((el) => revealObserver.observe(el));
+
+    function formatNumber(value, suffix = '', decimals = 0){
+      const fixed = Number(value).toFixed(decimals);
+      const parts = fixed.split('.');
+      parts[0] = Number(parts[0]).toLocaleString('fr-FR');
+      return parts.join(decimals > 0 ? ',' : '') + suffix;
+    }
+
+    const counterObserver = new IntersectionObserver((entries, obs) => {
+      entries.forEach((entry) => {
+        if(!entry.isIntersecting) return;
+        const counter = entry.target;
+        const target = parseFloat(counter.dataset.target);
+        const suffix = counter.dataset.suffix || '';
+        const decimals = parseInt(counter.dataset.decimals || '0', 10);
+        const duration = 1800;
+        let start = null;
+
+        function animate(timestamp){
+          if(!start) start = timestamp;
+          const progress = Math.min((timestamp - start) / duration, 1);
+          const eased = 1 - Math.pow(1 - progress, 3);
+          counter.textContent = formatNumber(target * eased, suffix, decimals);
+          if(progress < 1) requestAnimationFrame(animate);
+          else counter.textContent = formatNumber(target, suffix, decimals);
+        }
+
+        requestAnimationFrame(animate);
+        obs.unobserve(counter);
+      });
+    }, { threshold: .72 });
+
+    document.querySelectorAll('.counter').forEach((counter) => counterObserver.observe(counter));
+
+    document.querySelectorAll('.faq-question').forEach((button) => {
+      button.addEventListener('click', () => {
+        const item = button.closest('.faq-item');
+        document.querySelectorAll('.faq-item').forEach((other) => {
+          if(other !== item) other.classList.remove('active');
+        });
+        item.classList.toggle('active');
+      });
+    });
+
+    document.querySelectorAll('.tilt').forEach((card) => {
+      card.addEventListener('mousemove', (e) => {
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        const rotateX = ((y / rect.height) - .5) * -8;
+        const rotateY = ((x / rect.width) - .5) * 8;
+        card.style.setProperty('--x', `${x}px`);
+        card.style.setProperty('--y', `${y}px`);
+        card.style.transform = `perspective(800px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-5px)`;
+      });
+      card.addEventListener('mouseleave', () => {
+        card.style.transform = '';
+      });
+    });
+
+    document.querySelectorAll('.magnetic').forEach((btn) => {
+      btn.addEventListener('mousemove', (e) => {
+        const rect = btn.getBoundingClientRect();
+        const x = e.clientX - rect.left - rect.width / 2;
+        const y = e.clientY - rect.top - rect.height / 2;
+        btn.style.transform = `translate(${x * .12}px, ${y * .18}px)`;
+      });
+      btn.addEventListener('mouseleave', () => {
+        btn.style.transform = '';
+      });
+    });
+
+    const phoneStage = document.getElementById('phoneStage');
+    if(phoneStage){
+      window.addEventListener('mousemove', (e) => {
+        if(window.innerWidth < 900) return;
+        const x = (e.clientX / window.innerWidth - .5) * 18;
+        const y = (e.clientY / window.innerHeight - .5) * 18;
+        phoneStage.style.transform = `rotateY(${x}deg) rotateX(${-y}deg)`;
+      });
+    }
+  </script>
 </body>
 </html>
