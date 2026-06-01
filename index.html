@@ -20,11 +20,11 @@
       --text:#f5f5f7;
       --muted:#a4a4ad;
       --muted-2:#73737d;
-      --red:#ff2b2b;
-      --red-dark:#9d0000;
-      --green:#00ff88;
-      --green-dark:#009e5a;
-      --gold:#d8b878;
+      --red:#c93a3a;
+      --red-dark:#6f1111;
+      --green:#3ddc97;
+      --green-dark:#168458;
+      --gold:#c8aa6e;
       --line:rgba(255,255,255,.10);
       --line-strong:rgba(255,255,255,.18);
       --shadow-red:0 28px 90px rgba(255,43,43,.22);
@@ -94,17 +94,40 @@
       left:0;
       right:0;
       z-index:100;
-      height:38px;
+      min-height:38px;
       display:flex;
       align-items:center;
       justify-content:center;
-      padding:0 14px;
-      background:linear-gradient(90deg, rgba(255,43,43,.94), rgba(80,0,0,.92), rgba(0,255,136,.72));
-      color:#fff;
+      gap:9px;
+      padding:8px 14px;
+      background:rgba(8,8,10,.86);
+      border-bottom:1px solid rgba(255,255,255,.08);
+      color:#e9e9ec;
       font-size:.82rem;
-      font-weight:900;
+      font-weight:760;
       letter-spacing:.01em;
       text-align:center;
+      backdrop-filter:blur(18px);
+    }
+
+    .top-banner strong{color:#fff;font-weight:950;}
+
+    .live-dot{
+      width:8px;
+      height:8px;
+      border-radius:50%;
+      background:var(--green);
+      box-shadow:0 0 0 rgba(61,220,151,.65);
+      animation:livePulse 1.45s infinite;
+      flex:0 0 auto;
+    }
+
+    .live-dot.small{width:7px;height:7px;}
+
+    @keyframes livePulse{
+      0%{box-shadow:0 0 0 0 rgba(61,220,151,.65);}
+      70%{box-shadow:0 0 0 9px rgba(61,220,151,0);}
+      100%{box-shadow:0 0 0 0 rgba(61,220,151,0);}
     }
 
     .nav{
@@ -194,14 +217,14 @@
 
     .btn-primary{
       color:#fff;
-      background:linear-gradient(135deg,var(--red),#ff0000 48%,var(--red-dark));
+      background:linear-gradient(135deg,var(--red-dark),var(--red) 52%,#2b0b0b);
       box-shadow:0 18px 55px rgba(255,0,0,.32), inset 0 0 0 1px rgba(255,255,255,.08);
     }
     .btn-primary:hover{transform:translateY(-4px) scale(1.025);box-shadow:0 24px 80px rgba(255,0,0,.48);}
 
     .btn-green{
       color:#03120a;
-      background:linear-gradient(135deg,var(--green),#00d977,var(--green-dark));
+      background:linear-gradient(135deg,var(--green-dark),var(--green),#bfe9d3);
       box-shadow:0 18px 55px rgba(0,255,136,.25), inset 0 0 0 1px rgba(255,255,255,.18);
     }
     .btn-green:hover{transform:translateY(-4px) scale(1.025);box-shadow:0 24px 80px rgba(0,255,136,.36);}
@@ -233,7 +256,7 @@
     .red-dot{background:var(--red);box-shadow:0 0 18px var(--red);}
 
     .gradient-text{
-      background:linear-gradient(95deg,#fff 0%,#ffd0d0 24%,var(--red) 45%,var(--green) 78%,#fff 100%);
+      background:linear-gradient(95deg,#fff 0%,#e8d6c0 28%,var(--gold) 48%,#d7f8e8 82%,#fff 100%);
       -webkit-background-clip:text;
       background-clip:text;
       color:transparent;
@@ -355,9 +378,10 @@
     .ticket-top{right:8px;top:32px;}
     .ticket-mid{left:14px;top:235px;animation-delay:-1.6s;}
     .ticket-bottom{left:38px;bottom:66px;animation-delay:-2.4s;}
-    .ticket-label{color:var(--muted);font-size:.76rem;font-weight:900;text-transform:uppercase;letter-spacing:.10em;}
+    .ticket-label{color:var(--muted);font-size:.76rem;font-weight:900;text-transform:uppercase;letter-spacing:.10em;display:flex;align-items:center;gap:8px;}
     .ticket-value{margin-top:4px;color:var(--green);font-size:1.28rem;font-weight:950;letter-spacing:-.04em;}
     .ticket-value.red{color:var(--red);}
+    .ticket-value.small-value{font-size:1rem;color:#fff;letter-spacing:-.02em;}
 
     @keyframes float{0%,100%{translate:0 0;}50%{translate:0 -18px;}}
 
@@ -558,7 +582,8 @@
   <div class="progress" id="progress"></div>
 
   <div class="top-banner">
-    🎁 PDF gratuit disponible — déjà 889 téléchargements — accès immédiat
+    <span class="live-dot"></span>
+    <span><strong>889</strong> personnes ont déjà récupéré le guide offert</span>
   </div>
 
   <nav class="nav">
@@ -567,12 +592,12 @@
       <span>Zone d'Ombre</span>
     </a>
     <div class="nav-links">
-      <a href="#guide">Guide gratuit</a>
+      <a href="#guide">Guide</a>
       <a href="#methode">Méthode</a>
       <a href="#resultats">Résultats</a>
-      <a href="#faq">FAQ</a>
+      <a href="#accompagnement">Accès</a>
     </div>
-    <a href="https://wa.me/33786705803?text=Salut%20Arno%2C%20je%20veux%20en%20savoir%20plus%20sur%20Zone%20d%27Ombre" target="_blank" rel="noopener noreferrer" class="btn btn-primary magnetic">WhatsApp</a>
+    <a href="#accompagnement" class="btn btn-primary magnetic">Candidater</a>
   </nav>
 
   <main id="top">
@@ -580,28 +605,28 @@
       <div class="container">
         <div class="hero-grid">
           <div class="hero-copy reveal">
-            <div class="eyebrow"><span class="dot"></span> Accompagnement privé — Vinted Luxe</div>
+            <div class="eyebrow"><span class="dot"></span> Vinted Luxe — accès privé</div>
             <h1>
-              L'achat-revente luxe
-              <span class="serif gradient-text">sans avancer dans le flou.</span>
+              Transforme Vinted en
+              <span class="serif gradient-text">terrain d'opportunités.</span>
             </h1>
             <p class="hero-lead">
-              Zone d'Ombre t'aide à apprendre comment repérer des pièces de luxe sous-cotées sur Vinted, analyser leur potentiel, négocier proprement et revendre avec une méthode claire.
+              Apprends à repérer les pièces de luxe sous-cotées, calculer tes marges, sécuriser tes achats et revendre avec une méthode claire — sans avancer au hasard.
             </p>
             <div class="hero-actions">
-              <a href="https://wa.me/33786705803?text=Salut%20Arno%2C%20je%20veux%20candidater%20pour%20Zone%20d%27Ombre" target="_blank" rel="noopener noreferrer" class="btn btn-primary magnetic">💬 Candidater sur WhatsApp</a>
-              <a href="#guide" class="btn btn-green magnetic">📥 Télécharger le PDF gratuit</a>
+              <a href="#guide" class="btn btn-primary magnetic">Recevoir le guide offert</a>
+              <a href="#accompagnement" class="btn btn-ghost magnetic">Voir l'accompagnement</a>
             </div>
             <div class="trust-row">
               <div class="avatars"><div class="avatar">A</div><div class="avatar">K</div><div class="avatar">M</div><div class="avatar">+</div></div>
-              <span>889 téléchargements du guide — accompagnement sélectif — réponse directe sur WhatsApp</span>
+              <span>889 téléchargements · méthode Vinted Luxe · accès privé sur candidature</span>
             </div>
           </div>
 
           <div class="hero-visual reveal">
             <div class="orb"></div>
-            <div class="floating-ticket ticket-top"><div class="ticket-label">Téléchargements</div><div class="ticket-value">889</div></div>
-            <div class="floating-ticket ticket-mid"><div class="ticket-label">Canal</div><div class="ticket-value red">Vinted Luxe</div></div>
+            <div class="floating-ticket ticket-top"><div class="ticket-label"><span class="live-dot small"></span> En direct</div><div class="ticket-value small-value">889 téléchargements</div></div>
+            <div class="floating-ticket ticket-mid"><div class="ticket-label">Marché</div><div class="ticket-value red">Luxe</div></div>
             <div class="phone-stage" id="phoneStage">
               <div class="phone-card one"><img src="https://res.cloudinary.com/dt8crx1kl/image/upload/v1775259239/Screenshot_20241207_185537_Vinted_zew5vd.jpg" alt="Résultat Vinted Zone d'Ombre"></div>
               <div class="phone-card two"><img src="https://res.cloudinary.com/dt8crx1kl/image/upload/v1775259238/IMG_4738_upxqim.png" alt="Capture vente Vinted luxe"></div>
@@ -612,8 +637,8 @@
         </div>
 
         <div class="stats-bar reveal">
-          <div class="stat glass tilt"><h3><span class="counter" data-target="71" data-suffix="+">0</span></h3><p>Personnes formées / accompagnées</p></div>
-          <div class="stat glass tilt"><h3><span class="counter" data-target="889" data-suffix="">0</span></h3><p>Téléchargements du PDF gratuit</p></div>
+          <div class="stat glass tilt"><h3><span class="counter" data-target="71" data-suffix="+">0</span></h3><p>Profils accompagnés</p></div>
+          <div class="stat glass tilt"><h3><span class="counter" data-target="889" data-suffix="">0</span></h3><p>Guides récupérés</p></div>
           <div class="stat glass tilt"><h3><span class="counter" data-target="3" data-suffix=" ans">0</span></h3><p>D'expérience terrain</p></div>
           <div class="stat glass tilt"><h3><span class="counter" data-target="4.9" data-suffix="/5" data-decimals="1">0</span></h3><p>Note moyenne</p></div>
         </div>
@@ -624,22 +649,22 @@
       <div class="container">
         <div class="download-card glass reveal">
           <div>
-            <div class="eyebrow"><span class="dot"></span> Guide PDF gratuit</div>
-            <h2>Le point de départ pour comprendre Vinted Luxe.</h2>
+            <div class="eyebrow"><span class="dot"></span> Guide offert</div>
+            <h2>Le guide offert pour poser les bases.</h2>
             <p>
-              Télécharge gratuitement le guide “Pourquoi commencer l'achat-revente Vinted Luxe en 2026” et découvre les bases : catégories intéressantes, erreurs à éviter, logique de marge, sourcing et revente.
+              Un guide simple et concret pour comprendre comment analyser une opportunité sur Vinted Luxe, éviter les erreurs classiques et commencer avec une vision plus claire.
             </p>
             <div class="download-meta">
-              <span class="pill">📥 PDF gratuit</span>
-              <span class="pill">⚡ Accès immédiat</span>
-              <span class="pill">✅ 889 téléchargements</span>
+              <span class="pill"><span class="live-dot small"></span> 889 téléchargements</span>
+              <span class="pill">Guide offert</span>
+              <span class="pill">Vinted Luxe</span>
             </div>
           </div>
           <div class="download-box">
             <div class="download-number"><span class="counter" data-target="889" data-suffix="">0</span></div>
-            <p>personnes ont déjà téléchargé le guide gratuit.</p>
-            <a href="guide-achat-revente-2026.pdf" download class="btn btn-green magnetic">📥 Télécharger le guide gratuit</a>
-            <p style="font-size:.86rem;text-align:center;margin-top:12px;">PDF gratuit — pas de paiement — accès instantané.</p>
+            <p>personnes ont déjà récupéré le guide.</p>
+            <a href="guide-achat-revente-2026.pdf" download class="btn btn-green magnetic">Recevoir le guide offert</a>
+            <p style="font-size:.86rem;text-align:center;margin-top:12px;">Guide offert pour découvrir la méthode.</p>
           </div>
         </div>
       </div>
@@ -650,7 +675,7 @@
         <div class="section-head reveal">
           <div class="eyebrow"><span class="dot red-dot"></span> Vidéo de présentation</div>
           <h2>Regarde comment fonctionne l'accompagnement.</h2>
-          <p>Une page doit emmener le visiteur vers une action simple : comprendre le potentiel, télécharger le guide, puis te contacter sur WhatsApp.</p>
+          <p>Comprends l'approche Zone d'Ombre : une méthode plus structurée pour chercher, analyser, acheter et revendre des pièces de luxe sur Vinted.</p>
         </div>
         <div class="video-shell glass reveal">
           <iframe src="https://player.vimeo.com/video/1076911087?title=0&byline=0&portrait=0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>
@@ -663,9 +688,9 @@
         <div class="split">
           <div class="panel glass reveal">
             <div class="eyebrow"><span class="dot"></span> Le vrai problème</div>
-            <h3>La plupart des débutants achètent au hasard.</h3>
+            <h3>Le vrai problème, ce n'est pas Vinted. C'est le manque de méthode.</h3>
             <p>
-              Ils voient une marque connue, pensent que c'est une bonne affaire, achètent trop vite, puis restent bloqués avec une pièce difficile à revendre. Zone d'Ombre est là pour structurer ta façon de chercher, analyser et décider.
+              Beaucoup achètent parce qu'une marque semble connue ou qu'un prix paraît bas. Résultat : argent bloqué, ventes lentes, mauvaises marges. Zone d'Ombre t'apprend à décider avec des critères précis.
             </p>
           </div>
           <div class="feature-grid">
@@ -700,8 +725,8 @@
       <div class="container">
         <div class="section-head reveal">
           <div class="eyebrow"><span class="dot"></span> Résultats</div>
-          <h2>Une page qui montre, pas seulement qui promet.</h2>
-          <p>Garde cette galerie et remplace progressivement par tes meilleures preuves : captures Vinted, messages, marges, ventes, avis.</p>
+          <h2>Des preuves visuelles, pas du blabla.</h2>
+          <p>La preuve doit être visible rapidement : captures Vinted, ventes, messages, marges et retours membres. C'est ce qui donne confiance avant de candidater.</p>
         </div>
         <div class="results-mosaic reveal">
           <div class="result-tile big"><img src="https://res.cloudinary.com/dt8crx1kl/image/upload/v1775259239/Screenshot_20241207_185537_Vinted_zew5vd.jpg" alt="Résultat Vinted"><div class="result-caption"><strong>Opération Vinted</strong><span>Analyse + revente</span></div></div>
@@ -747,24 +772,24 @@
         <div class="offer glass reveal">
           <div>
             <div class="eyebrow"><span class="dot"></span> Accompagnement privé</div>
-            <h2>On ne cherche pas des curieux. On cherche des profils sérieux.</h2>
+            <h2>Un accès privé pour avancer plus sérieusement.</h2>
             <p>
-              Zone d'Ombre est pensé pour les personnes qui veulent apprendre proprement l'achat-revente de luxe sur Vinted, avec une méthode et un vrai échange humain.
+              Zone d'Ombre est pensé pour les personnes qui veulent apprendre l'achat-revente de luxe sur Vinted avec un cadre clair, des ressources concrètes et un accompagnement plus humain.
             </p>
             <div class="offer-list">
               <div class="offer-item"><span class="check">✓</span><span>Plan d'action clair pour démarrer sans te disperser.</span></div>
-              <div class="offer-item"><span class="check">✓</span><span>Support et échange direct via WhatsApp.</span></div>
+              <div class="offer-item"><span class="check">✓</span><span>Suivi privé pour poser tes questions et avancer plus vite.</span></div>
               <div class="offer-item"><span class="check">✓</span><span>Analyse des annonces, marges et opportunités.</span></div>
               <div class="offer-item"><span class="check">✓</span><span>Conseils sur sourcing, vérification, prix et revente.</span></div>
-              <div class="offer-item"><span class="check">✓</span><span>Accès au guide PDF gratuit et aux ressources de base.</span></div>
+              <div class="offer-item"><span class="check">✓</span><span>Ressources, exemples et méthode de recherche structurée.</span></div>
             </div>
           </div>
           <div class="price-card">
             <div class="label">Candidature</div>
-            <h3>Accès sur échange WhatsApp</h3>
-            <p>Tu m'envoies un message, je regarde ton niveau, ton objectif et ton sérieux. Si c'est cohérent, on voit comment t'accompagner.</p>
-            <a href="https://wa.me/33786705803?text=Salut%20Arno%2C%20je%20veux%20savoir%20si%20je%20peux%20rejoindre%20Zone%20d%27Ombre" target="_blank" rel="noopener noreferrer" class="btn btn-primary magnetic">💬 Demander l'accès</a>
-            <div class="scarcity">Réponse directe sur WhatsApp</div>
+            <h3>Accès sur candidature</h3>
+            <p>L'accès se fait après candidature. L'objectif est simple : vérifier ton niveau, ton budget, ton sérieux et voir si Zone d'Ombre peut réellement t'aider.</p>
+            <a href="https://wa.me/33786705803?text=salut%20Arno%20j%27ai%20vu%20ta%20page%20et%20j%27ai%20besoin%20de%20renseignements%20sur%20l%27achat%20revente" target="_blank" rel="noopener noreferrer" class="btn btn-primary magnetic">Candidater</a>
+            <div class="scarcity">Accès limité pour garder un suivi qualitatif</div>
           </div>
         </div>
       </div>
@@ -774,7 +799,7 @@
       <div class="container">
         <div class="section-head reveal">
           <div class="eyebrow"><span class="dot"></span> Avis</div>
-          <h2>Des retours simples, utiles et crédibles.</h2>
+          <h2>Ce qui rassure avant de passer à l'action.</h2>
         </div>
         <div class="reviews-grid">
           <div class="review-card glass reveal"><div class="stars">★★★★★</div><p>“J'ai compris comment analyser une annonce au lieu d'acheter juste parce que la marque semblait connue.”</p><div class="review-author"><span class="review-avatar">K</span>Kevin M.</div></div>
@@ -793,7 +818,7 @@
         <div class="faq">
           <div class="faq-item glass reveal"><button class="faq-question">Est-ce adapté aux débutants ? <span>+</span></button><div class="faq-answer">Oui. L'accompagnement est pensé pour partir de zéro, avec une méthode étape par étape.</div></div>
           <div class="faq-item glass reveal"><button class="faq-question">Faut-il beaucoup d'argent pour commencer ? <span>+</span></button><div class="faq-answer">Non, mais il faut un budget de départ raisonnable. Le but est de faire tourner ton capital progressivement sans prendre de risques inutiles.</div></div>
-          <div class="faq-item glass reveal"><button class="faq-question">Le PDF est-il vraiment gratuit ? <span>+</span></button><div class="faq-answer">Oui. Le guide PDF est gratuit et accessible immédiatement via le bouton de téléchargement.</div></div>
+          <div class="faq-item glass reveal"><button class="faq-question">Le guide est-il vraiment offert ? <span>+</span></button><div class="faq-answer">Oui. Le guide est offert et permet de découvrir les bases avant de candidater à l'accompagnement.</div></div>
           <div class="faq-item glass reveal"><button class="faq-question">Est-ce que les résultats sont garantis ? <span>+</span></button><div class="faq-answer">Non. Les résultats dépendent de ton implication, de ton budget, de ta régularité et de ton exécution. L'accompagnement aide à prendre de meilleures décisions.</div></div>
           <div class="faq-item glass reveal"><button class="faq-question">Comment se passe l'accès ? <span>+</span></button><div class="faq-answer">Tu me contactes sur WhatsApp. On échange sur ta situation, ton objectif et ton sérieux avant de voir si l'accompagnement est adapté.</div></div>
         </div>
@@ -804,13 +829,13 @@
       <div class="container">
         <div class="final-cta glass reveal">
           <div class="eyebrow"><span class="dot"></span> Zone d'Ombre</div>
-          <h2>Télécharge le guide ou contacte-moi directement.</h2>
+          <h2>Récupère le guide. Candidature ensuite si tu veux aller plus loin.</h2>
           <p>
-            Si tu veux comprendre l'achat-revente Vinted Luxe avant de te lancer, commence par le PDF gratuit. Si tu veux aller plus vite, écris-moi directement sur WhatsApp.
+            Le guide te donne une première vision. L'accompagnement est réservé aux personnes prêtes à appliquer sérieusement une méthode structurée sur Vinted Luxe.
           </p>
           <div class="hero-actions" style="justify-content:center;">
-            <a href="guide-achat-revente-2026.pdf" download class="btn btn-green magnetic">📥 Télécharger le PDF gratuit</a>
-            <a href="https://wa.me/33786705803?text=Salut%20Arno%2C%20je%20veux%20rejoindre%20Zone%20d%27Ombre" target="_blank" rel="noopener noreferrer" class="btn btn-primary magnetic">💬 Écrire sur WhatsApp</a>
+            <a href="guide-achat-revente-2026.pdf" download class="btn btn-ghost magnetic">Recevoir le guide offert</a>
+            <a href="https://wa.me/33786705803?text=Salut%20Arno%2C%20je%20veux%20rejoindre%20Zone%20d%27Ombre" target="_blank" rel="noopener noreferrer" class="btn btn-primary magnetic">Candidater à l'accompagnement</a>
           </div>
         </div>
       </div>
@@ -824,7 +849,7 @@
         <p>Accompagnement Vinted Luxe — achat-revente structuré.</p>
       </div>
       <div class="footer-links">
-        <a href="https://wa.me/33786705803" target="_blank" rel="noopener noreferrer">WhatsApp</a>
+        <a href="https://wa.me/33786705803" target="_blank" rel="noopener noreferrer">Candidature</a>
         <a href="https://instagram.com/arno.dwe" target="_blank" rel="noopener noreferrer">Instagram</a>
         <a href="#guide">Guide gratuit</a>
         <a href="#faq">FAQ</a>
@@ -835,7 +860,7 @@
 
   <a href="https://wa.me/33786705803?text=Salut%20Arno%2C%20je%20veux%20en%20savoir%20plus%20sur%20Zone%20d%27Ombre" target="_blank" rel="noopener noreferrer" class="floating-whatsapp" aria-label="Contacter Zone d'Ombre sur WhatsApp">
     <span class="bubble">💬</span>
-    <span>WhatsApp</span>
+    <span>Candidater</span>
   </a>
 
   <script>
