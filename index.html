@@ -575,6 +575,59 @@
       .phone-card.three{right:136px;}
       .download-meta{display:grid;}
     }
+
+
+    /* VSL clean top section */
+    .vsl-top{
+      min-height:100vh;
+      display:flex;
+      align-items:center;
+      padding:170px 0 92px;
+    }
+
+    .vsl-wrap{
+      max-width:980px;
+      margin:0 auto;
+      text-align:center;
+    }
+
+    .vsl-title{
+      margin-top:22px;
+      font-size:clamp(2.7rem,5.8vw,6.2rem);
+      line-height:.94;
+      letter-spacing:-.075em;
+      font-weight:950;
+    }
+
+    .vsl-title .red-income{
+      color:var(--red);
+      text-shadow:0 0 32px rgba(201,58,58,.34);
+      white-space:nowrap;
+    }
+
+    .vsl-subtitle{
+      max-width:760px;
+      margin:24px auto 0;
+      color:#d4d4da;
+      font-size:clamp(1.02rem,1.32vw,1.22rem);
+      line-height:1.75;
+      font-weight:600;
+    }
+
+    .vsl-video{
+      margin-top:34px;
+    }
+
+    .vsl-video iframe{
+      height:560px;
+    }
+
+    @media(max-width:720px){
+      .vsl-top{padding-top:150px;min-height:auto;}
+      .vsl-title{font-size:2.72rem;}
+      .vsl-video iframe{height:250px;}
+    }
+
   </style>
 </head>
 
@@ -601,6 +654,29 @@
   </nav>
 
   <main id="top">
+
+    <section class="vsl-top">
+      <div class="container">
+        <div class="vsl-wrap reveal">
+          <div class="eyebrow"><span class="dot red-dot"></span> Vidéo privée — Zone d'Ombre</div>
+          <h1 class="vsl-title">
+            T'essaies de lancer un business,<br>
+            mais t'as toujours <span class="red-income">0€ de revenus</span> ?
+          </h1>
+          <p class="vsl-subtitle">
+            Regarde cette vidéo jusqu'au bout : tu vas comprendre comment arrêter d'avancer au hasard et commencer à suivre une méthode claire pour l'achat-revente sur Vinted.
+          </p>
+          <div class="video-shell glass vsl-video">
+            <iframe
+              src="https://player.vimeo.com/video/1197685656"
+              allow="autoplay; fullscreen; picture-in-picture"
+              allowfullscreen>
+            </iframe>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <section class="hero">
       <div class="container">
         <div class="hero-grid">
@@ -673,19 +749,7 @@
     <section id="methode">
       <div class="container">
         <div class="section-head reveal">
-          <div class="eyebrow"><span class="dot red-dot"></span> Vidéo de présentation</div>
-          <h2>Regarde comment fonctionne l'accompagnement.</h2>
-          <p>Comprends l'approche Zone d'Ombre : une méthode plus structurée pour chercher, analyser, acheter et revendre des pièces de luxe sur Vinted.</p>
-        </div>
-        <div class="video-shell glass reveal">
-          <iframe
-    src="https://player.vimeo.com/video/1197685656"
-    allow="autoplay; fullscreen; picture-in-picture"
-    allowfullscreen>
-</iframe>
-      </div>
     </section>
-
     <section>
       <div class="container">
         <div class="split">
